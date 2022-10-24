@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 00:42:18 by abucia            #+#    #+#              #
-#    Updated: 2022/10/21 07:13:23 by abucia           ###   ########lyon.fr    #
+#    Updated: 2022/10/24 15:41:40 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CC = gcc
 OBJ = $(SRC:.c=.o)
 OBJ_B = $(BONUS:.c=.o)
 FLAG = -Lmlx -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+FLAG_MACOS = -lmlx -framework OpenGL -framework AppKit
 HEADER = includes/header.h
 HEADER_BONUS = includes/header.h
 LMLX = make
