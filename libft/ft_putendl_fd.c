@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:39:05 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 00:09:25 by vducoulo         ###   ########.fr       */
+/*   Created: 2021/11/10 14:03:34 by vducoulo          #+#    #+#             */
+/*   Updated: 2021/11/10 14:07:32 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
-# include "../libft/libft.h"
-# include "execution.h"
+#include "libft.h"
 
-# define DEBUG 1
-#endif
+void	ft_putendl_fd(char *str, int fd)
+{
+	ft_putstr_fd(str, fd);
+	ft_putchar_fd('\n', fd);
+}

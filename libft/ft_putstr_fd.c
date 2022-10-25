@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:39:05 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 00:09:25 by vducoulo         ###   ########.fr       */
+/*   Created: 2021/11/10 13:57:18 by vducoulo          #+#    #+#             */
+/*   Updated: 2022/05/11 16:02:00 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
-# include "../libft/libft.h"
-# include "execution.h"
+#include "./libft.h"
 
-# define DEBUG 1
-#endif
+int	ft_putstr_fd(char *str, int fd)
+{
+	size_t	i;
+	int		res;
+
+	i = 0;
+	res = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			res += ft_putchar_fd(str[i++], fd);
+		}
+	}
+	else
+		res += ft_putstr_fd("(null)", 1);
+	return (res);
+}

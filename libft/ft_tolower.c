@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:39:05 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 00:09:25 by vducoulo         ###   ########.fr       */
+/*   Created: 2021/11/07 19:40:31 by vducoulo          #+#    #+#             */
+/*   Updated: 2021/11/07 19:44:06 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
-# include "../libft/libft.h"
-# include "execution.h"
-
-# define DEBUG 1
-#endif
+int	ft_tolower(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	else
+		return (c);
+}

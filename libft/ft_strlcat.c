@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:39:05 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 00:09:25 by vducoulo         ###   ########.fr       */
+/*   Created: 2021/11/07 12:53:35 by vducoulo          #+#    #+#             */
+/*   Updated: 2021/11/13 11:20:56 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
-# include "../libft/libft.h"
-# include "execution.h"
+#include "libft.h"
 
-# define DEBUG 1
-#endif
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+	size_t	o;
+	size_t	srclen;
+
+	srclen = ft_strlen(src);
+	i = 0;
+	o = ft_strlen(dst);
+	if (dstsize > (size_t)ft_strlen(dst))
+	{
+		while (dstsize > 0 && i < dstsize - o + i - 1 && src[i])
+			dst[o++] = src[i++];
+		dst[o] = '\0';
+		while (src[i++])
+			o++;
+		return (o);
+	}
+	else
+		return (srclen + dstsize);
+}
