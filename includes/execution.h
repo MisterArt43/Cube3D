@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 16:07:41 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:12:44 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ typedef struct s_game {
 	int		window_height;
 	int		x; //debug
 	int		y; //debug
+	int		**game_tab;
+	int		game_tab_width;
+	int		game_tab_height;
 }	t_game;
 
 int			render_next_frame(t_game *game);
@@ -36,6 +39,7 @@ t_game		*game_initializer(void);
 void		execution_launcher(char *map);
 void		free_and_exit(t_game *game, int exit_status);
 void		free_my_game(t_game *game);
+void		game_renderer(t_game *game);
 
 // debug
 
