@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game_initializer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 16:11:26 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:18:20 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-t_game	*game_initializer(void)
+t_game	*game_initializer(char *map_path)
 {
 	t_game	*game;
 
@@ -31,5 +31,10 @@ t_game	*game_initializer(void)
 			&game->line_length, &game->endian);
 	game->x = 100; // debug 
 	game->y = 100; // debug
+	game->game_tab_height = 19; // debug / modified by parsing
+	game->game_tab_width = 29; // debug / modified by parsing
+	game->game_tab = tmp_game_tab_feeder(map_path, game);
+	game->game_cell_size = game->window_height / game->game_tab_height;
+	game->displacement_speed = 7;
 	return (game);
 }
