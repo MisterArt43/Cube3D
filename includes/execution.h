@@ -6,14 +6,16 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 19:17:49 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:29:38 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
-
 # include "../mlx/mlx_mac/mlx.h"
+
+// movement_tab : 0 = forward, 1 = backward, 2 = left turn, 3 = right turn,
+// 4 = rotate right , 5 = rotate left (if 1 : performs if 0 : no actions)
 
 typedef struct s_game {
 	void	*img;
@@ -32,6 +34,7 @@ typedef struct s_game {
 	int		game_tab_height;
 	int		game_cell_size;
 	int		displacement_speed;
+	int		movement_tab[6];
 }	t_game;
 
 typedef struct s_vector2d {
@@ -50,6 +53,7 @@ void		game_renderer(t_game *game);
 void		vd_cube_drawer(t_game *game, t_vector2d *top_left,
 				t_vector2d *bottom_right, int color);
 void		game_grid_drawer(t_game *game);
+int			hook_key_release_handler(int keycode, t_game *game);
 
 // debug
 

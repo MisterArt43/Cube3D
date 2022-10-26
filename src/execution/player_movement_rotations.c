@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_quitters.c                                    :+:      :+:    :+:   */
+/*   player_movement_rotations.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 15:31:59 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 22:28:59 by vducoulo         ###   ########.fr       */
+/*   Created: 2022/10/26 22:34:30 by vducoulo          #+#    #+#             */
+/*   Updated: 2022/10/26 22:35:12 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-void	free_and_exit(t_game *game, int exit_status)
+void	player_rotate_right(void)
 {
-	if (game)
-		free_my_game(game);
-	exit(exit_status);
+	return ;
 }
 
-//add free matrix
-void	free_my_game(t_game *game)
+void	player_rotate_left(void)
 {
-	free(game);
+	return ;
 }

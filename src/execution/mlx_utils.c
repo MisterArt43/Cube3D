@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:16:40 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 19:08:38 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:09:14 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	render_next_frame(t_game *game)
 {
+	//game_grid_drawer(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	return (0);
 }
