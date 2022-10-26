@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/10/25 23:44:34 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/10/26 16:00:07 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,13 @@ NAME = cub3D
 
 NAME_BONUS = cub3D_bonus
 
-SRCS_GLOBAL = 	src/main.c
+SRCS_GLOBAL = 	src/main.c \
+				src/execution/execution_main.c \
+				src/execution/game_quitters.c \
+				src/execution/mlx_utils.c \
+				src/execution/game_initializer.c \
+				src/execution/user_inputs.c \
+				src/execution/debug.c
 
 SRCS_MANDATORY = 
 
@@ -26,7 +32,7 @@ OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 INCLUDES = headers/cub3d.h
 
-CC = gcc #-fsanitize=address
+CC = gcc -fsanitize=address -g
 RM = rm -f
 
 FLAGS = -Wall -Wextra -Werror -O3

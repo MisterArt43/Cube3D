@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:45:59 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 15:51:22 by vducoulo         ###   ########.fr       */
+/*   Created: 2022/10/26 15:26:51 by vducoulo          #+#    #+#             */
+/*   Updated: 2022/10/26 15:56:22 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/header.h"
+#include "../../includes/header.h"
 
-int	main(int argc, char **argv)
+void	test_mlx(t_game *game)
 {
-	(void)argv;
-	if (argc == 2)
-	{
-		execution_launcher(argv[1]);
-	}
-	else
-		ft_putstr_fd("Error\nInvalid Argument, try :\n./cub3d <map.cub>\n", 2);
-	return (0);
+	mlx_hook(game->mlx_win, 2, 0, hook_key_press_handler, game);
+	mlx_loop_hook(game->mlx, render_next_frame, game);
+	mlx_loop(game->mlx);
+	return ;
+}
+
+void	execution_launcher(char *map)
+{
+	t_game	*game;
+
+	game = game_initializer();
+	if (!game || !map)
+		free_and_exit(game, EXIT_FAILURE);
+	test_mlx(game);
+	free_and_exit(game, EXIT_SUCCESS);
 }
