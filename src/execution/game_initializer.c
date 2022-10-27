@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_initializer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 19:18:20 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:52:05 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_game	*game_initializer(char *map_path)
 	game->game_tab_width = 29; // debug / modified by parsing
 	game->game_tab = tmp_game_tab_feeder(map_path, game);
 	game->game_cell_size = game->window_height / game->game_tab_height;
-	game->displacement_speed = 7;
+	game->displacement_speed = 4;
+	game->player_angle = 2 * PI; // debug, change wiyh N, E, O angle
 	return (game);
 }

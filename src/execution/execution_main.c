@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:26:51 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 22:30:35 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:53:02 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	event_handler(t_game *game)
 {
+	game_grid_drawer(game);
 	move_my_player(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	return ;
 }
 
@@ -36,7 +38,6 @@ void	execution_launcher(char *map)
 	game = game_initializer(map);
 	if (!game || !map)
 		free_and_exit(game, EXIT_FAILURE);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	game_renderer(game);
 	free_and_exit(game, EXIT_SUCCESS);
 }

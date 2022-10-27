@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 22:29:38 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:30:23 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_game {
 	int		window_height;
 	int		x; //debug
 	int		y; //debug
+	double	player_delta_x; //debug
+	double	player_delta_y; //debug
+	double	player_angle; //debug
 	int		**game_tab;
 	int		game_tab_width;
 	int		game_tab_height;
@@ -54,6 +57,10 @@ void		vd_cube_drawer(t_game *game, t_vector2d *top_left,
 				t_vector2d *bottom_right, int color);
 void		game_grid_drawer(t_game *game);
 int			hook_key_release_handler(int keycode, t_game *game);
+void		move_my_player(t_game *game);
+void		player_rotate_left(t_game *game);
+void		player_rotate_right(t_game *game);
+void		print_player_position(t_game *game);
 
 // debug
 
