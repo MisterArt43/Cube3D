@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/27 15:52:05 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:09:01 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,12 @@ t_game	*game_initializer(char *map_path)
 	game->displacement_speed = 4;
 	game->player_angle = 2 * PI; // debug, change wiyh N, E, O angle
 	return (game);
+}
+
+void	raycast_initializer(t_game *game)
+{
+	t_raycast	raycast;
+
+	raycast = game->raycast;
+	raycast.ray_count = 1;
 }

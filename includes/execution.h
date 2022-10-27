@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/27 16:30:23 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:28:36 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,38 @@
 // movement_tab : 0 = forward, 1 = backward, 2 = left turn, 3 = right turn,
 // 4 = rotate right , 5 = rotate left (if 1 : performs if 0 : no actions)
 
+typedef struct s_raycast {
+	int		ray_count;
+	double	ray_angle;
+	double	ray_y;
+	double	ray_x;
+	double	ray_x_offset;
+	double	ray_y_offset;
+	int		depth_of_field;
+}	t_raycast;
+
 typedef struct s_game {
-	void	*img;
-	char	*addr;
-	void	*mlx;
-	void	*mlx_win;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		window_width;
-	int		window_height;
-	int		x; //debug
-	int		y; //debug
-	double	player_delta_x; //debug
-	double	player_delta_y; //debug
-	double	player_angle; //debug
-	int		**game_tab;
-	int		game_tab_width;
-	int		game_tab_height;
-	int		game_cell_size;
-	int		displacement_speed;
-	int		movement_tab[6];
+	void		*img;
+	char		*addr;
+	void		*mlx;
+	void		*mlx_win;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			window_width;
+	int			window_height;
+	int			x; //debug
+	int			y; //debug
+	double		player_delta_x; //debug
+	double		player_delta_y; //debug
+	double		player_angle; //debug
+	int			**game_tab;
+	int			game_tab_width;
+	int			game_tab_height;
+	int			game_cell_size;
+	int			displacement_speed;
+	int			movement_tab[6];
+	t_raycast	raycast;
 }	t_game;
 
 typedef struct s_vector2d {
@@ -61,6 +72,7 @@ void		move_my_player(t_game *game);
 void		player_rotate_left(t_game *game);
 void		player_rotate_right(t_game *game);
 void		print_player_position(t_game *game);
+void		check_horizontal_ray_collision(t_raycast raycast, t_game *game);
 
 // debug
 
