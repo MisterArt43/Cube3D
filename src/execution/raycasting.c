@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:55:46 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/27 17:31:46 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:43:00 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	check_horizontal_ray_collision(t_raycast raycast, t_game *game)
 	float	a_tan;
 
 	a_tan = -1 / tan(raycast.ray_angle);
-	if (raycast.ray_angle > PI)
+	if (raycast.ray_angle > PI) // facing up
 	{
 		raycast.ray_y = ((game->y >> 6) << 6) - 0.0001;
 		raycast.ray_x = (game->x - game->y) * a_tan + game->x;
 		raycast.ray_y_offset = -64;
 		raycast.ray_y_offset = -raycast.ray_y_offset * a_tan;
 	}
-	else if (raycast.ray_angle < PI)
+	else if (raycast.ray_angle < PI) // facing down
 	{
 		raycast.ray_y = ((game->y >> 6) << 6) + 64;
 		raycast.ray_x = (game->x - game->y) * a_tan + game->x;
@@ -55,6 +55,6 @@ void	check_horizontal_ray_collision(t_raycast raycast, t_game *game)
 	}
 	while (raycast.depth_of_field < 8)
 	{
-		
+
 	}
 }
