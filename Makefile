@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+         #
+#    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/10/27 13:33:05 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/10/30 16:14:31 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRCS_GLOBAL = 	src/main.c \
 				src/execution/game_grid_drawer.c \
 				src/execution/player_movements.c \
 				src/execution/player_movement_rotations.c \
+				src/execution/raycasting.c \
+				src/execution/raycasting_utils.c \
 
 SRCS_MANDATORY = 
 

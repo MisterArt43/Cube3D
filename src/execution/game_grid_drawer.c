@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_grid_drawer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:40:19 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/27 15:53:30 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:23:15 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	game_grid_drawer(t_game *game)
 		{
 			top_left.x = x * game->game_cell_size;
 			top_left.y = y * game->game_cell_size;
-			bottom_right.x = top_left.x + game->game_cell_size;
-			bottom_right.y = top_left.y + game->game_cell_size;
+			bottom_right.x = top_left.x + game->game_cell_size ;
+			bottom_right.y = top_left.y + game->game_cell_size ;
 			if (game->game_tab[y][x] == 1)
-				vd_cube_drawer(game, &top_left, &bottom_right, 0x00FF0000);
+				vd_cube_drawer(game, &top_left, &bottom_right, 0x616161);
 			else
 				vd_cube_drawer(game, &top_left, &bottom_right, 0x00000000);
 			x ++;

@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:58:10 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/27 16:29:27 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:40:10 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
+
+void	set_mlx_background(t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < game->window_height)
+	{
+		x = 0;
+		while (x < game->window_width)
+		{
+			my_mlx_pixel_put(game, x, y, 0x333333);
+			x ++;
+		}
+		y ++;
+	}
+}
 
 void	ft_print_five(char selectid, int increment, t_game *game)
 {

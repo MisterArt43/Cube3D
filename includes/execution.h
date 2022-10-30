@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/27 17:28:36 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:12:11 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ typedef struct s_raycast {
 	double	ray_x_offset;
 	double	ray_y_offset;
 	int		depth_of_field;
+	int		map_x;
+	int		map_y;
+	int		map_pos;
+	double	traveled_horiz;
+	double	traveled_vert;
+	double	last_horiz_x;
+	double	last_horiz_y;
+	double	last_vert_x;
+	double	last_vert_y;
 }	t_raycast;
 
 typedef struct s_game {
@@ -48,7 +57,7 @@ typedef struct s_game {
 	int			game_cell_size;
 	int			displacement_speed;
 	int			movement_tab[6];
-	t_raycast	raycast;
+	t_raycast	*raycast;
 }	t_game;
 
 typedef struct s_vector2d {
@@ -72,11 +81,17 @@ void		move_my_player(t_game *game);
 void		player_rotate_left(t_game *game);
 void		player_rotate_right(t_game *game);
 void		print_player_position(t_game *game);
-void		check_horizontal_ray_collision(t_raycast raycast, t_game *game);
+void		check_horizontal_ray_collision(t_raycast *raycast, t_game *game);
+int			is_in_map_limits(t_game *game, int x, int y);
+void		raycasting(t_game *game);
+void		raycast_initializer(t_game *game);
+void		check_vertical_ray_collision(t_raycast *raycast, t_game *game);
+double		get_traveled_ray_distance(t_game *game, t_raycast *raycast);
 
 // debug
 
 void		ft_print_five(char selectid, int increment, t_game *game);
 void		debug_print_cubname(t_game *game);
 int			**tmp_game_tab_feeder(char *map, t_game *game);
+void		set_mlx_background(t_game *game);
 #endif

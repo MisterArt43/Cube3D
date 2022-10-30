@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:26:51 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/27 15:53:02 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:45:42 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	event_handler(t_game *game)
 {
+	set_mlx_background(game);
 	game_grid_drawer(game);
 	move_my_player(game);
+	raycasting(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	return ;
 }

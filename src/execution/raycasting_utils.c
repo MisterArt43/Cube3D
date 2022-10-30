@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:39:05 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/30 14:53:51 by vducoulo         ###   ########.fr       */
+/*   Created: 2022/10/30 16:02:24 by vducoulo          #+#    #+#             */
+/*   Updated: 2022/10/30 16:06:46 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
-# include "../libft/libft.h"
-# include "execution.h"
-# include <unistd.h>
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
+#include "../../includes/header.h"
 
-# define DEBUG 1
-# define ERROR -1
-# define PI 3.1415926535897932384
-
-#endif
+double	get_traveled_ray_distance(t_game *game, t_raycast *raycast)
+{
+	return (cos(raycast->ray_angle) * (raycast->ray_x - game->x)
+		- sin(raycast->ray_angle) * (raycast->ray_y - game->y));
+}
