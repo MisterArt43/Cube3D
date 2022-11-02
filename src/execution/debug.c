@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:58:10 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/29 18:40:10 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:34:10 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,18 @@ void	debug_print_cubname(t_game *game)
 		my_mlx_pixel_put(game, game->x, ++game->y, 0x00FF0000);
 		usleep(100000);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
+	}
+}
+
+void	debug_draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
+{
+	int	x;
+	int	y;
+
+	for (float i = 0.0; i <= 1; i += 0.005)
+	{
+		x = x0 + (x1 - x0) * i;
+		y = y0 + (y1 - y0) * i;
+		my_mlx_pixel_put(game, x, y, color);
 	}
 }

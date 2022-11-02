@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/30 16:19:56 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/02 21:51:04 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	raycast_initializer(t_game *game)
 
 	game->raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
 	raycast = game->raycast;
-	raycast->ray_count = 1;
+	raycast->ray_count = 360;
 }

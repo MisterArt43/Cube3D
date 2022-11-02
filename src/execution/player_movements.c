@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:30:31 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/29 18:06:30 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:25:23 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	player_move_forward(t_game *game)
 {
-	game->x -= game->player_delta_x;
-	game->y -= game->player_delta_y;
+	game->x += game->player_delta_x;
+	game->y += game->player_delta_y;
 	//ft_print_five('y', 0, game);
 	my_mlx_pixel_put(game, game->x, game->y, 0xd4d8fa);
 	return ;
@@ -23,8 +23,8 @@ void	player_move_forward(t_game *game)
 
 void	player_move_backward(t_game *game)
 {
-	game->x += game->player_delta_x;
-	game->y += game->player_delta_y;
+	game->x -= game->player_delta_x;
+	game->y -= game->player_delta_y;
 	//ft_print_five('y', 1, game);
 	my_mlx_pixel_put(game, game->x, game->y, 0xd4d8fa);
 	return ;

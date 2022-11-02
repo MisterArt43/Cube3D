@@ -6,13 +6,16 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/30 16:12:11 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:17:06 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 # include "../mlx/mlx_mac/mlx.h"
+
+# define DOF_DELIM 30
+# define DR 0.0174533
 
 // movement_tab : 0 = forward, 1 = backward, 2 = left turn, 3 = right turn,
 // 4 = rotate right , 5 = rotate left (if 1 : performs if 0 : no actions)
@@ -86,7 +89,19 @@ int			is_in_map_limits(t_game *game, int x, int y);
 void		raycasting(t_game *game);
 void		raycast_initializer(t_game *game);
 void		check_vertical_ray_collision(t_raycast *raycast, t_game *game);
-double		get_traveled_ray_distance(t_game *game, t_raycast *raycast);
+double		get_traveled_ray_distance(float ax, float ay, float bx, float by);
+int			is_in_map_limits(t_game *game, int x, int y);
+void		raycasting_horizontal_looking_up(t_game *game, t_raycast *raycast,
+				float a_tan);
+void		raycasting_horizontal_looking_down(t_game *game, t_raycast *raycast,
+				float a_tan);
+void		raycasting_vertical_looking_right(t_game *game, t_raycast *raycast,
+				float a_tan);
+void		raycasting_vertical_looking_left(t_game *game, t_raycast *raycast,
+				float a_tan);
+void		raycasting_looking_straight(t_game *game, t_raycast *raycast);
+void		raycasting_angle_interpeter(int vertical, t_game *game,
+				t_raycast *raycast);
 
 // debug
 
@@ -94,4 +109,6 @@ void		ft_print_five(char selectid, int increment, t_game *game);
 void		debug_print_cubname(t_game *game);
 int			**tmp_game_tab_feeder(char *map, t_game *game);
 void		set_mlx_background(t_game *game);
+void		debug_draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+
 #endif
