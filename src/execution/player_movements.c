@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:30:31 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/02 23:25:23 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:29:42 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ void	player_move_backward(t_game *game)
 
 void	player_turn_right(t_game *game)
 {
-	ft_print_five('x', 1, game);
+	player_rotate_right(game);
+	//ft_print_five('x', 1, game);
 	return ;
 }
 
 void	player_turn_left(t_game *game)
 {
-	ft_print_five('x', 0, game);
+	player_rotate_left(game);
+	//ft_print_five('x', 0, game);
 	return ;
 }
 

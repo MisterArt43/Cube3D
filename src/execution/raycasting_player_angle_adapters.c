@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:42:50 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/02 21:14:22 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:01:28 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	raycasting_horizontal_looking_down(t_game *game, t_raycast *raycast,
 
 void	raycasting_looking_straight(t_game *game, t_raycast *raycast)
 {
+	ft_printf("\n looking straight");
 	raycast->ray_x = game->x;
 	raycast->ray_y = game->y;
-	raycast->depth_of_field = DOF_DELIM;
+	raycast->depth_of_field = game->game_tab_max_encountred_cell;
 	return ;
 }
 

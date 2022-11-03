@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:02:24 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/02 23:37:04 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:19:18 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ void	raycasting_angle_interpeter(int vertical, t_game *game, t_raycast *raycast)
 {
 	float	a_tan;
 
+	raycast->ray_angle = assure_360_deg_angle(raycast->ray_angle);
 	if (!vertical)
 	{
 		a_tan = -1 / tan(raycast->ray_angle);
 		if (raycast->ray_angle > M_PI)
 			raycasting_horizontal_looking_up(game, raycast, a_tan);
-		else if (raycast->ray_angle < M_PI)
+		else if (raycast->ray_angle < M_PI && raycast->ray_angle)
 			raycasting_horizontal_looking_down(game, raycast, a_tan);
 		else if (raycast->ray_angle == 0 || raycast->ray_angle == M_PI)
 			raycasting_looking_straight(game, raycast);
@@ -49,4 +50,13 @@ void	raycasting_angle_interpeter(int vertical, t_game *game, t_raycast *raycast)
 		else if (raycast->ray_angle == 0 || raycast->ray_angle == M_PI)
 			raycasting_looking_straight(game, raycast);
 	}
+}
+
+double	assure_360_deg_angle(double a)
+{
+	if (a >= ((double)2 * M_PI))
+		a -= ((double)2 * M_PI);
+	if (a < 0)
+		a += ((double)2 * M_PI);
+	return (a);
 }

@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/02 23:17:06 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:50:03 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EXECUTION_H
 # include "../mlx/mlx_mac/mlx.h"
 
-# define DOF_DELIM 30
+# define DOF_DELIM 20
 # define DR 0.0174533
 
 // movement_tab : 0 = forward, 1 = backward, 2 = left turn, 3 = right turn,
@@ -57,6 +57,7 @@ typedef struct s_game {
 	int			**game_tab;
 	int			game_tab_width;
 	int			game_tab_height;
+	int			game_tab_max_encountred_cell;
 	int			game_cell_size;
 	int			displacement_speed;
 	int			movement_tab[6];
@@ -87,7 +88,7 @@ void		print_player_position(t_game *game);
 void		check_horizontal_ray_collision(t_raycast *raycast, t_game *game);
 int			is_in_map_limits(t_game *game, int x, int y);
 void		raycasting(t_game *game);
-void		raycast_initializer(t_game *game);
+t_raycast	*raycast_initializer(t_game *game);
 void		check_vertical_ray_collision(t_raycast *raycast, t_game *game);
 double		get_traveled_ray_distance(float ax, float ay, float bx, float by);
 int			is_in_map_limits(t_game *game, int x, int y);
@@ -102,6 +103,7 @@ void		raycasting_vertical_looking_left(t_game *game, t_raycast *raycast,
 void		raycasting_looking_straight(t_game *game, t_raycast *raycast);
 void		raycasting_angle_interpeter(int vertical, t_game *game,
 				t_raycast *raycast);
+double		assure_360_deg_angle(double a);
 
 // debug
 

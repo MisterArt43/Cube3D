@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/02 21:51:04 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:39:27 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,26 @@ t_game	*game_initializer(char *map_path)
 	game->y = 100; // debug
 	game->game_tab_height = 19; // debug / modified by parsing
 	game->game_tab_width = 29; // debug / modified by parsing
+	if (game->game_tab_width >= game->game_tab_height)
+		game->game_tab_max_encountred_cell = game->game_tab_width;
+	else
+		game->game_tab_max_encountred_cell = game->game_tab_height;
 	game->game_tab = tmp_game_tab_feeder(map_path, game);
 	//game->game_cell_size = game->window_height / game->game_tab_height;
 	game->game_cell_size = 64;
 	game->displacement_speed = 4;
-	game->player_angle = 2 * PI; // debug, change wiyh N, E, O angle
-	raycast_initializer(game);
+	game->player_angle = 2 * M_PI; // debug, change wiyh N, E, O angle
+	game->player_delta_x = cos(game->player_angle) * 5;
+	game->player_delta_y = sin(game->player_angle) * 5;
+	game->raycast = raycast_initializer(game);
 	return (game);
 }
 
-void	raycast_initializer(t_game *game)
+t_raycast	*raycast_initializer(t_game *game)
 {
 	t_raycast	*raycast;
 
-	game->raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
-	raycast = game->raycast;
-	raycast->ray_count = 360;
+	raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
+	raycast->ray_count = 60;
+	return (raycast);
 }
