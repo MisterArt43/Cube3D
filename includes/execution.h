@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/03 15:50:03 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:31:49 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_raycast {
 	int		map_pos;
 	double	traveled_horiz;
 	double	traveled_vert;
+	double	min_traveled;
 	double	last_horiz_x;
 	double	last_horiz_y;
 	double	last_vert_x;
@@ -104,6 +105,7 @@ void		raycasting_looking_straight(t_game *game, t_raycast *raycast);
 void		raycasting_angle_interpeter(int vertical, t_game *game,
 				t_raycast *raycast);
 double		assure_360_deg_angle(double a);
+void 		draw_walls(t_game *game, t_raycast *raycast, int x);
 
 // debug
 

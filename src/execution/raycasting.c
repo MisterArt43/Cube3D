@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:55:46 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/03 17:21:14 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:10:16 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ void	raycasting(t_game *game)
 
 	i = 0;
 	raycast = game->raycast;
-	raycast->ray_angle = assure_360_deg_angle(game->player_angle)
-		- DR * (raycast->ray_count / 2);
-	while (i < raycast->ray_count)
+	raycast->ray_angle = assure_360_deg_angle(game->player_angle + (DR * 25));
+	while (i < game->window_width)
 	{
 		raycast->traveled_horiz = 10000000;
 		raycast->traveled_vert = 10000000;
@@ -30,11 +29,19 @@ void	raycasting(t_game *game)
 		raycast->depth_of_field = 0;
 		check_vertical_ray_collision(raycast, game);
 		if (raycast->traveled_horiz <= raycast->traveled_vert)
-			debug_draw_line(game, raycast->last_horiz_x, raycast->last_horiz_y, game->x, game->y, 0x1500FF); //blueray
+		{
+			raycast->min_traveled = raycast->traveled_horiz;
+			//debug_draw_line(game, raycast->last_horiz_x, raycast->last_horiz_y, game->x, game->y, 0x1500FF); //blueray
+			//my_mlx_pixel_put(game, raycast->last_horiz_x, raycast->last_horiz_y, 0x00FFFF);		
+		}
 		else
-			debug_draw_line(game, raycast->last_vert_x, raycast->last_vert_y, game->x, game->y, 0x9EFF00); //yellowray
-		raycast->ray_angle += DR;
+		{
+			raycast->min_traveled = raycast->traveled_vert;
+			//debug_draw_line(game, raycast->last_vert_x, raycast->last_vert_y, game->x, game->y, 0x9EFF00); //yellowray
+			//my_mlx_pixel_put(game, raycast->last_vert_x, raycast->last_vert_y, 0x00FFFF);		
+		}
+		draw_walls(game, raycast, i);
+		raycast->ray_angle = assure_360_deg_angle(raycast->ray_angle - (DR * 50) / game->window_width);
 		i++;
 	}
-	return ;
 }
