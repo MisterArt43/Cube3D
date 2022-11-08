@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/07 12:33:58 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/09 00:43:52 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_game	*game_initializer(char *map_path)
 	game->addr = mlx_get_data_addr(game->img, &game->bits_per_pixel,
 			&game->line_length, &game->endian);
 	game->x = 100; // debug 
-	game->y = 100; // debug
+	game->y = 1000; // debug
 	game->game_tab_height = 19; // debug / modified by parsing
 	game->game_tab_width = 29; // debug / modified by parsing
 	if (game->game_tab_width >= game->game_tab_height)
