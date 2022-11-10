@@ -6,11 +6,17 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:10:33 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 18:11:12 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:57:22 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
+
+unsigned long	rgb_to_hexa(int color[3])
+{
+	return (((color[0] & 0xff) << 16) + ((color[1] & 0xff) << 8)
+		+ (color[2] & 0xff));
+}
 
 int	ft_atoi_cub_edition(const char *str)
 {

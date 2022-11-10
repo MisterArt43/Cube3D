@@ -6,7 +6,7 @@
 #    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/07 13:32:57 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/11/10 17:44:36 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS_GLOBAL = 	src/main.c \
 				src/execution/raycasting_player_angle_adapters.c \
 				src/execution/raycasting_collisions_checker.c  \
 				src/execution/wall_drawers.c \
+				src/execution/textures.c \
 
 SRCS_MANDATORY = 
 
