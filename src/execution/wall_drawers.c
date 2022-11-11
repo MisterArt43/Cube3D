@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:19:42 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/10 14:15:12 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:39:56 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	draw_walls(t_game *game, t_raycast *raycast, int x)
 	int	wall_height;
 	int	y;
 	int	i;
+	int	texture_y;
 
 	i = 0;
 	raycast->min_traveled = raycast->min_traveled
@@ -52,9 +53,15 @@ void	draw_walls(t_game *game, t_raycast *raycast, int x)
 	y = game->window_height / 2 - wall_height / 2;
 	if (y < 0)
 		i = -y;
+	texture_y = 0;
 	while (i < wall_height && y + i < game->window_height)
 	{
-		my_mlx_pixel_put(game, x, y + i, 0xff0000);
+		texture_y += (double)raycast->horiz_ray_texture->height_img / (double)wall_height;
+		my_mlx_pixel_put(game, x, y + i,
+			get_text_pixel(raycast->horiz_ray_texture,
+				(int)(raycast->last_horiz_x / 64.0f) * 2
+				* raycast->horiz_ray_texture->width_img,
+				texture_y));
 		i++;
 	}
 	return ;

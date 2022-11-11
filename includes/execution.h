@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/10 18:14:12 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:03:11 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,45 @@ typedef struct s_texture
 
 typedef struct s_texture_info
 {
-	t_texture	north_texture;
-	t_texture	east_texture;
-	t_texture	south_texture;
-	t_texture	west_texture;
+	t_texture	*north_texture;
+	t_texture	*east_texture;
+	t_texture	*south_texture;
+	t_texture	*west_texture;
 }	t_texture_info;
 
+typedef struct s_ray {
+	t_texture	texture;
+	float		x;
+	float		y;
+	float		x_offset;
+	float		y_offset;
+	int			depth_of_field;
+	int			traveled_dst;
+}	t_ray;
+
 typedef struct s_raycast {
-	int		ray_count;
-	double	ray_angle;
-	double	ray_y;
-	double	ray_x;
-	double	ray_x_offset;
-	double	ray_y_offset;
-	int		depth_of_field;
-	int		map_x;
-	int		map_y;
-	int		map_pos;
-	double	traveled_horiz;
-	double	traveled_vert;
-	double	min_traveled;
-	double	last_horiz_x;
-	double	last_horiz_y;
-	double	last_vert_x;
-	double	last_vert_y;
+	int			ray_count;
+	double		ray_angle;
+	double		ray_y;
+	double		ray_x;
+	double		ray_x_offset;
+	double		ray_y_offset;
+	int			depth_of_field;
+	int			map_x;
+	int			map_y;
+	int			map_pos;
+	double		traveled_horiz;
+	double		traveled_vert;
+	double		min_traveled;
+	double		last_horiz_x;
+	double		last_horiz_y;
+	double		last_vert_x;
+	double		last_vert_y;
+	t_ray		horizontal_ray;
+	t_ray		vertical_ray;
+	t_ray		winning_ray;
+	t_texture	*horiz_ray_texture;
+	t_texture	*vert_ray_texture;
 }	t_raycast;
 
 typedef struct s_game {
@@ -135,6 +150,7 @@ t_texture_info	*textures_initializer(t_game *game);
 int				all_textures_loader(t_game	*game,
 					t_texture_info *all_textures);
 int				single_texture_loader(t_game *game, t_texture *texture);
+int				get_text_pixel(t_texture *texture, int x, int y);
 
 // debug
 

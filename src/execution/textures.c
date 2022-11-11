@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:38:34 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/10 18:11:51 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:44:34 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ t_texture_info	*textures_initializer(t_game *game)
 
 int	all_textures_loader(t_game	*game, t_texture_info *all_textures)
 {
-	if (single_texture_loader(game, &all_textures->north_texture) == ERROR
-		|| single_texture_loader(game, &all_textures->south_texture) == ERROR
-		|| single_texture_loader(game, &all_textures->east_texture) == ERROR
-		|| single_texture_loader(game, &all_textures->west_texture) == ERROR)
+	all_textures->north_texture = ft_calloc(1, sizeof(t_texture));
+	all_textures->east_texture = ft_calloc(1, sizeof(t_texture));
+	all_textures->south_texture = ft_calloc(1, sizeof(t_texture));
+	all_textures->west_texture = ft_calloc(1, sizeof(t_texture));
+	if (single_texture_loader(game, all_textures->north_texture) == ERROR
+		|| single_texture_loader(game, all_textures->south_texture) == ERROR
+		|| single_texture_loader(game, all_textures->east_texture) == ERROR
+		|| single_texture_loader(game, all_textures->west_texture) == ERROR)
 		return (ERROR);
 	return (0);
 }
@@ -44,7 +48,9 @@ int	single_texture_loader(t_game *game, t_texture *texture)
 			&texture->bits_per_pixel, &texture->line_length, &texture->endian);
 	if (!texture->texture_addr)
 		return (ERROR);
-	ft_printf("\n texture %s successfully loaded", ft_strrchr(texture->xpm_path, '/'));
+	if (DEBUG == 1)
+		ft_printf("\n texture %s successfully loaded",
+			ft_strrchr(texture->xpm_path, '/'));
 	return (0);
 }
 
