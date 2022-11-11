@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/10 17:57:23 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:11:32 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ t_raycast	*raycast_initializer(t_game *game)
 {
 	t_raycast	*raycast;
 
-	raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
-	raycast->ray_count = 60;
+	raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast)); //a protéger
+	raycast->horizontal_ray = (t_ray *)ft_calloc(1, sizeof(t_ray)); // protéger
+	raycast->vertical_ray = (t_ray *)ft_calloc(1, sizeof(t_ray)); // protéger
+	raycast->ray_count = 60; //deleted - UNUSED
 	return (raycast);
 }

@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:19:42 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/11 01:39:56 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/11 12:54:30 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_floor_and_ceilling(t_game *game)
 	}
 }
 
-void	draw_walls(t_game *game, t_raycast *raycast, int x)
+void	draw_walls(t_game *game, t_raycast *raycast, t_ray *ray, int x)
 {
 	int	wall_height;
 	int	y;
@@ -42,12 +42,12 @@ void	draw_walls(t_game *game, t_raycast *raycast, int x)
 	int	texture_y;
 
 	i = 0;
-	raycast->min_traveled = raycast->min_traveled
+	ray->traveled_dst = ray->traveled_dst
 		* cos(assure_360_deg_angle(game->player_angle - raycast->ray_angle));
-	if (raycast->min_traveled < 1)
-		raycast->min_traveled = 1;
+	if (ray->traveled_dst < 1)
+		ray->traveled_dst = 1;
 	wall_height = game->window_height / 10
-		* game->window_height / (int)raycast->min_traveled;
+		* game->window_height / ray->traveled_dst;
 	if (wall_height > game->window_height)
 		wall_height = game->window_height;
 	y = game->window_height / 2 - wall_height / 2;
@@ -56,11 +56,11 @@ void	draw_walls(t_game *game, t_raycast *raycast, int x)
 	texture_y = 0;
 	while (i < wall_height && y + i < game->window_height)
 	{
-		texture_y += (double)raycast->horiz_ray_texture->height_img / (double)wall_height;
+		texture_y += (double)ray->texture->height_img / (double)wall_height;
 		my_mlx_pixel_put(game, x, y + i,
-			get_text_pixel(raycast->horiz_ray_texture,
-				(int)(raycast->last_horiz_x / 64.0f) * 2
-				* raycast->horiz_ray_texture->width_img,
+			get_text_pixel(ray->texture,
+				(int)(ray->x / 64.0f) * 2
+				* ray->texture->width_img,
 				texture_y));
 		i++;
 	}

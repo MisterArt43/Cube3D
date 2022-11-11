@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/11 11:03:11 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/11 12:55:17 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,14 @@ typedef struct s_texture_info
 }	t_texture_info;
 
 typedef struct s_ray {
-	t_texture	texture;
+	t_texture	*texture;
+	float		a_tan;
 	float		x;
 	float		y;
 	float		x_offset;
 	float		y_offset;
+	int			map_x;
+	int			map_y;
 	int			depth_of_field;
 	int			traveled_dst;
 }	t_ray;
@@ -53,26 +56,26 @@ typedef struct s_ray {
 typedef struct s_raycast {
 	int			ray_count;
 	double		ray_angle;
-	double		ray_y;
-	double		ray_x;
-	double		ray_x_offset;
-	double		ray_y_offset;
-	int			depth_of_field;
+	double		ray_y; //deleted
+	double		ray_x; //deleted
+	double		ray_x_offset; //deleted
+	double		ray_y_offset; //deleted
+	int			depth_of_field; //deleted
 	int			map_x;
 	int			map_y;
 	int			map_pos;
-	double		traveled_horiz;
-	double		traveled_vert;
-	double		min_traveled;
-	double		last_horiz_x;
-	double		last_horiz_y;
-	double		last_vert_x;
-	double		last_vert_y;
-	t_ray		horizontal_ray;
-	t_ray		vertical_ray;
-	t_ray		winning_ray;
-	t_texture	*horiz_ray_texture;
-	t_texture	*vert_ray_texture;
+	double		traveled_horiz; //deleted
+	double		traveled_vert; //deleted
+	double		min_traveled; //deleted
+	double		last_horiz_x; //deleted
+	double		last_horiz_y; //deleted
+	double		last_vert_x; //deleted
+	double		last_vert_y; //deleted
+	t_ray		*horizontal_ray;
+	t_ray		*vertical_ray;
+	t_ray		*winning_ray;
+	t_texture	*horiz_ray_texture; //deleted
+	t_texture	*vert_ray_texture; //deleted
 }	t_raycast;
 
 typedef struct s_game {
@@ -124,26 +127,22 @@ void			move_my_player(t_game *game);
 void			player_rotate_left(t_game *game);
 void			player_rotate_right(t_game *game);
 void			print_player_position(t_game *game);
-void			check_horizontal_ray_collision(t_raycast *raycast, t_game *game);
+void			check_horizontal_ray_collision(t_raycast *raycast, t_ray *ray, t_game *game);
 int				is_in_map_limits(t_game *game, int x, int y);
 void			raycasting(t_game *game);
 t_raycast		*raycast_initializer(t_game *game);
 void			check_vertical_ray_collision(t_raycast *raycast, t_game *game);
 double			get_traveled_ray_distance(float ax, float ay, float bx, float by);
 int				is_in_map_limits(t_game *game, int x, int y);
-void			raycasting_horizontal_looking_up(t_game *game, t_raycast *raycast,
-					float a_tan);
-void			raycasting_horizontal_looking_down(t_game *game, t_raycast *raycast,
-					float a_tan);
-void			raycasting_vertical_looking_right(t_game *game, t_raycast *raycast,
-					float a_tan);
-void			raycasting_vertical_looking_left(t_game *game, t_raycast *raycast,
-					float a_tan);
-void			raycasting_looking_straight(t_game *game, t_raycast *raycast);
+void			raycasting_horizontal_looking_up(t_game *game, t_ray *ray);
+void			raycasting_horizontal_looking_down(t_game *game, t_ray *ray);
+void			raycasting_vertical_looking_right(t_game *game, t_ray *ray);
+void			raycasting_vertical_looking_left(t_game *game, t_ray *ray);
+void			raycasting_looking_straight(t_game *game, t_ray *ray);
 void			raycasting_angle_interpeter(int vertical, t_game *game,
-					t_raycast *raycast);
+					t_ray *ray, float ray_angle);
 double			assure_360_deg_angle(double a);
-void			draw_walls(t_game *game, t_raycast *raycast, int x);
+void			draw_walls(t_game *game, t_raycast *raycast, t_ray *ray, int x);
 unsigned long	rgb_to_hexa(int color[3]);
 void			draw_floor_and_ceilling(t_game *game);
 t_texture_info	*textures_initializer(t_game *game);
@@ -151,6 +150,8 @@ int				all_textures_loader(t_game	*game,
 					t_texture_info *all_textures);
 int				single_texture_loader(t_game *game, t_texture *texture);
 int				get_text_pixel(t_texture *texture, int x, int y);
+void			check_ray_collision(t_raycast *raycast, t_ray *ray,
+					t_game *game, int vertical);
 
 // debug
 

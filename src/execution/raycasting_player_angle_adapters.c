@@ -6,61 +6,57 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:42:50 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/11 01:03:41 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:30:22 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-void	raycasting_horizontal_looking_up(t_game *game, t_raycast *raycast,
-		float a_tan)
+void	raycasting_horizontal_looking_up(t_game *game, t_ray *ray)
 {
-	raycast->ray_y = ((game->y >> 6) << 6) - 0.0001;
-	raycast->ray_x = (game->y - raycast->ray_y) * a_tan + game->x;
-	raycast->ray_y_offset = -game->game_cell_size;
-	raycast->ray_x_offset = -raycast->ray_y_offset * a_tan;
-	raycast->horiz_ray_texture = game->all_textures->north_texture;
+	ray->y = ((game->y >> 6) << 6) - 0.0001;
+	ray->x = (game->y - ray->y) * ray->a_tan + game->x;
+	ray->y_offset = -game->game_cell_size;
+	ray->x_offset = -ray->y_offset * ray->a_tan;
+	ray->texture = game->all_textures->north_texture;
 	return ;
 }
 
-void	raycasting_horizontal_looking_down(t_game *game, t_raycast *raycast,
-		float a_tan)
+void	raycasting_horizontal_looking_down(t_game *game, t_ray *ray)
 {
-	raycast->ray_y = ((game->y >> 6) << 6) + game->game_cell_size;
-	raycast->ray_x = (game->y - raycast->ray_y) * a_tan + game->x;
-	raycast->ray_y_offset = game->game_cell_size;
-	raycast->ray_x_offset = -raycast->ray_y_offset * a_tan;
-	raycast->horiz_ray_texture = game->all_textures->south_texture;
+	ray->y = ((game->y >> 6) << 6) + game->game_cell_size;
+	ray->x = (game->y - ray->y) * ray->a_tan + game->x;
+	ray->y_offset = game->game_cell_size;
+	ray->x_offset = -ray->y_offset * ray->a_tan;
+	ray->texture = game->all_textures->south_texture;
 	return ;
 }
 
-void	raycasting_looking_straight(t_game *game, t_raycast *raycast)
+void	raycasting_looking_straight(t_game *game, t_ray *ray)
 {
 	ft_printf("\n looking straight");
-	raycast->ray_x = game->x;
-	raycast->ray_y = game->y;
-	raycast->depth_of_field = game->game_tab_max_encountred_cell;
+	ray->x = game->x;
+	ray->y = game->y;
+	ray->depth_of_field = game->game_tab_max_encountred_cell;
 	return ;
 }
 
-void	raycasting_vertical_looking_right(t_game *game, t_raycast *raycast,
-		float a_tan)
+void	raycasting_vertical_looking_right(t_game *game, t_ray *ray)
 {
-	raycast->ray_x = ((game->x >> 6) << 6) + game->game_cell_size;
-	raycast->ray_y = (game->x - raycast->ray_x) * a_tan + game->y;
-	raycast->ray_x_offset = game->game_cell_size;
-	raycast->ray_y_offset = -raycast->ray_x_offset * a_tan;
-	raycast->vert_ray_texture = game->all_textures->east_texture;
+	ray->x = ((game->x >> 6) << 6) + game->game_cell_size;
+	ray->y = (game->x - ray->x) * ray->a_tan + game->y;
+	ray->x_offset = game->game_cell_size;
+	ray->y_offset = -ray->x_offset * ray->a_tan;
+	ray->texture = game->all_textures->east_texture;
 	return ;
 }
 
-void	raycasting_vertical_looking_left(t_game *game, t_raycast *raycast,
-		float a_tan)
+void	raycasting_vertical_looking_left(t_game *game, t_ray *ray)
 {
-	raycast->ray_x = ((game->x >> 6) << 6) - 0.0001;
-	raycast->ray_y = (game->x - raycast->ray_x) * a_tan + game->y;
-	raycast->ray_x_offset = -game->game_cell_size;
-	raycast->ray_y_offset = -raycast->ray_x_offset * a_tan;
-	raycast->vert_ray_texture = game->all_textures->west_texture;
+	ray->x = ((game->x >> 6) << 6) - 0.0001;
+	ray->y = (game->x - ray->x) * ray->a_tan + game->y;
+	ray->x_offset = -game->game_cell_size;
+	ray->y_offset = -ray->x_offset * ray->a_tan;
+	ray->texture = game->all_textures->west_texture;
 	return ;
 }

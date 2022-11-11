@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:02:24 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/03 17:19:18 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:36:47 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,31 @@ int	is_in_map_limits(t_game *game, int x, int y)
 	return (0);
 }
 
-void	raycasting_angle_interpeter(int vertical, t_game *game, t_raycast *raycast)
+void	raycasting_angle_interpeter(int vertical, t_game *game, t_ray *ray,
+	float ray_angle)
 {
 	float	a_tan;
 
-	raycast->ray_angle = assure_360_deg_angle(raycast->ray_angle);
+	ray_angle = assure_360_deg_angle(ray_angle);
 	if (!vertical)
 	{
-		a_tan = -1 / tan(raycast->ray_angle);
-		if (raycast->ray_angle > M_PI)
-			raycasting_horizontal_looking_up(game, raycast, a_tan);
-		else if (raycast->ray_angle < M_PI && raycast->ray_angle)
-			raycasting_horizontal_looking_down(game, raycast, a_tan);
-		else if (raycast->ray_angle == 0 || raycast->ray_angle == M_PI)
-			raycasting_looking_straight(game, raycast);
+		ray->a_tan = -1 / tan(ray_angle);
+		if (ray_angle > M_PI)
+			raycasting_horizontal_looking_up(game, ray);
+		else if (ray_angle < M_PI && ray_angle)
+			raycasting_horizontal_looking_down(game, ray);
+		else if (ray_angle == 0 || ray_angle == M_PI)
+			raycasting_looking_straight(game, ray);
 	}
 	else if (vertical == 1)
 	{
-		a_tan = -tan(raycast->ray_angle);
-		if (raycast->ray_angle > M_PI / 2 && raycast->ray_angle < 3 * M_PI / 2) // looking left
-			raycasting_vertical_looking_left(game, raycast, a_tan);
-		else if (raycast->ray_angle < M_PI / 2 || raycast->ray_angle > 3 * M_PI / 2) // looking right
-			raycasting_vertical_looking_right(game, raycast, a_tan);
-		else if (raycast->ray_angle == 0 || raycast->ray_angle == M_PI)
-			raycasting_looking_straight(game, raycast);
+		ray->a_tan = -tan(ray_angle);
+		if (ray_angle > M_PI / 2 && ray_angle < 3 * M_PI / 2)
+			raycasting_vertical_looking_left(game, ray);
+		else if (ray_angle < M_PI / 2 || ray_angle > 3 * M_PI / 2)
+			raycasting_vertical_looking_right(game, ray);
+		else if (ray_angle == 0 || ray_angle == M_PI)
+			raycasting_looking_straight(game, ray);
 	}
 }
 
