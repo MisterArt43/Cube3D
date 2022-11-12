@@ -19,12 +19,15 @@
 # include <fcntl.h>
 # include "../mlx/mlx.h"
 
-#define FALSE 0
-#define TRUE 16844
+# define FALSE 0
+# define TRUE 16844
+# define EXTENSION ".xpm"
 
-// < ------------------------------------------------ >
-// < -------------------  UTILS  -------------------- >
-// < ------------------------------------------------ >
+# ifdef __linux__
+#  define IS_LIN 1
+# else
+#  define IS_LIN 0
+# endif
 
 typedef struct s_vector
 {
@@ -32,15 +35,6 @@ typedef struct s_vector
 	float	y;
 	float	z;
 }	t_vector;
-
-int		ft_strlen(char *str);
-int		ft_putstr_fd(char *str, int fd);
-void	*ft_memset(void *s, int c, size_t n);
-int		ft_nstrncmp(const char *s1, const char *s2, size_t n, size_t start);
-
-// < ------------------------------------------------ >
-// < ----------------  DATA STRUCT  ----------------- >
-// < ------------------------------------------------ >
 
 typedef struct s_data
 {
@@ -53,54 +47,71 @@ typedef struct s_data
 	int		h;
 }	t_data;
 
-// < ------------------------------------------------ >
-// < -----------------   PARSING  ------------------- >
-// < ------------------------------------------------ >
+typedef struct s_texture
+{
+	t_data	txt_n;
+	t_data	txt_e;
+	t_data	txt_w;
+	t_data	txt_s;
+}	t_texture;
 
 typedef struct s_map
 {
-	int		fd;
-	char	*file_str;
-	char	*map;
-	int		h;
-	int		l;
-
+	struct s_texture	txt;
+	int					fd;
+	char				*file_str;
+	char				*map;
+	int					h;
+	int					l;
 }	t_map;
-
-char	*ft_readall(int fd);
-
-// < ------------------------------------------------ >
-// < -----------------   TEXTURE  ------------------- >
-// < ------------------------------------------------ >
-
-typedef struct s_texture
-{
-	t_data	*txt_n;
-	t_data	*txt_e;
-	t_data	*txt_w;
-	t_data	*txt_s;
-	int		nb_txt_n;
-	int		nb_txt_e;
-	int		nb_txt_w;
-	int		nb_txt_s;
-};
-
-// < ------------------------------------------------ >
-// < --------------------  GAME  -------------------- >
-// < ------------------------------------------------ >
 
 typedef struct s_game
 {
 	void	*mlx;
 	void	*mlx_win;
-	struct s_texture texture;
-	struct s_map map;
+	struct	s_map map;
 }	t_game;
+
+// < ------------------------------------------------ >
+// < -------------------  UTILS  -------------------- >
+// < ------------------------------------------------ >
+
+int		ft_strlen(const char *str);
+int		ft_putstr_fd(char *str, int fd);
+void	*ft_memset(void *s, int c, size_t n);
+int		ft_nstrncmp(const char *s1, const char *s2, size_t n, size_t start);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s1);
+
+// < ------------------------------------------------ >
+// < ----------------  DATA STRUCT  ----------------- >
+// < ------------------------------------------------ >
+
+
+
+// < ------------------------------------------------ >
+// < -----------------   TEXTURE  ------------------- >
+// < ------------------------------------------------ >
+
+
+
+// < ------------------------------------------------ >
+// < -----------------   PARSING  ------------------- >
+// < ------------------------------------------------ >
+
+char	*ft_readall(int fd, t_game *game);
+void	start_parse(char *map_file, t_game *game);
+
+// < ------------------------------------------------ >
+// < --------------------  GAME  -------------------- >
+// < ------------------------------------------------ >
+
+
 
 // < ------------------------------------------------ >
 // < ---------------  ERROR HANDLER  ---------------- >
 // < ------------------------------------------------ >
 
-void	ft_ermap(char *str);
+void	ft_ermap(char *str, void *ptr, t_game *game);
 
 #endif

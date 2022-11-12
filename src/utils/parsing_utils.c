@@ -12,11 +12,18 @@
 
 #include "../../includes/header.h"
 
-void	ft_ermap(char *str)
+void	stop_mlx(t_game *game)
+{
+	mlx_destroy_display(game->mlx);
+}
+
+void	ft_ermap(char *str, void *ptr, t_game *game)
 {
 	int		i;
 	size_t	res;
 
+	if (ptr != NULL)
+		free(ptr);
 	i = 0;
 	write(2, "Error\n", 6);
 	if (!str)
@@ -31,26 +38,20 @@ void	ft_ermap(char *str)
 	exit(0);
 }
 
-void	read_error(int fd, char *str, char *er)
+void	read_error(int fd, char *str, char *er, t_game *game)
 {
-	int	i;
-
-	i = 0;
-	free(str);
-	i = close(fd);
-	if (i == -1)
-		ft_ermap(er);
-	ft_ermap(er);
+	close(fd);
+	ft_ermap(er, str, game);
 }
 
-char	*ft_readall(int fd)
+char	*ft_readall(int fd, t_game *game)
 {
 	char	*all;
 	char	*buffer;
 	int		i;
 
 	if (fd == -1)
-		ft_ermap("can't open this file\n");
+		ft_ermap("can't open this file\n", NULL , game);
 	all = NULL;
 	buffer = malloc((17) * sizeof(char));
 	if (!buffer)
@@ -60,11 +61,11 @@ char	*ft_readall(int fd)
 	{
 		i = read(fd, buffer, 16);
 		if (i == -1)
-			read_error(fd, buffer, "an error occurred while reading the file\n");
+			read_error(fd, buffer, "an error occurred while reading the file\n", game);
 		buffer[i] = '\0';
 		all = ft_freestrjoin(all, buffer);
 		if (!all)
-			read_error(fd, buffer, "an error occurred while reading the file\n");
+			read_error(fd, buffer, "an error occurred while reading the file\n", game);
 	}
 	free(buffer);
 	return (all);

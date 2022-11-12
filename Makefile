@@ -12,7 +12,11 @@
 
 NAME = cub3D
 BONUS_NAME = cub3D
-SRC = 
+SRC = src/parsing/start_parse.c \
+src/main.c \
+src/utils/common_utils.c \
+src/utils/parsing_utils.c \
+
 BONUS = 
 
 CC = gcc
