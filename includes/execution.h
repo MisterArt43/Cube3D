@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/11 12:55:17 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/12 00:45:58 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct s_texture
 	int		endian;
 	int		width_img;
 	int		height_img;
+	int		texture_id;
+	int		texture_y;
+	int		texture_x;
 }	t_texture;
 
 typedef struct s_texture_info
@@ -148,10 +151,13 @@ void			draw_floor_and_ceilling(t_game *game);
 t_texture_info	*textures_initializer(t_game *game);
 int				all_textures_loader(t_game	*game,
 					t_texture_info *all_textures);
-int				single_texture_loader(t_game *game, t_texture *texture);
+int				single_texture_loader(t_game *game, t_texture *texture,
+					int texture_id);
 int				get_text_pixel(t_texture *texture, int x, int y);
 void			check_ray_collision(t_raycast *raycast, t_ray *ray,
 					t_game *game, int vertical);
+void			set_texture_coordonates(t_game *game, t_ray *ray, int base_draw,
+					int wall_height);
 
 // debug
 
