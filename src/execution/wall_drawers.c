@@ -6,11 +6,19 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:19:42 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/12 01:04:53 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/14 08:02:42 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
+
+void	remove_fisheye_effect(t_game *game, t_raycast *raycast, t_ray *ray)
+{
+	ray->traveled_dst = ray->traveled_dst
+		* cos(assure_360_deg_angle(game->player_angle - raycast->ray_angle));
+	if (ray->traveled_dst < 1)
+		ray->traveled_dst = 1;
+}
 
 void	draw_floor_and_ceilling(t_game *game)
 {
@@ -42,21 +50,21 @@ void	draw_walls(t_game *game, t_raycast *raycast, t_ray *ray, int x)
 	int	i;
 
 	i = 0;
-	ray->traveled_dst = ray->traveled_dst
-		* cos(assure_360_deg_angle(game->player_angle - raycast->ray_angle));
-	if (ray->traveled_dst < 1)
-		ray->traveled_dst = 1;
+	remove_fisheye_effect(game, raycast, ray);
 	wall_height = game->window_height / 10
 		* game->window_height / ray->traveled_dst;
+	set_texture_x_coordonates(game, ray);
+	ray->texture->ratio = (double)(ray->texture->height_img)
+		/ (double)wall_height;
 	if (wall_height > game->window_height)
 		wall_height = game->window_height;
 	y = game->window_height / 2 - wall_height / 2;
 	if (y < 0)
 		i = -y;
-	set_texture_coordonates(game, ray, i, wall_height);
+	ray->texture->texture_y = i * ray->texture->ratio;
 	while (i < wall_height && y + i < game->window_height)
 	{
-		ray->texture->texture_y += ray->texture->height_img / wall_height;
+		ray->texture->texture_y += ray->texture->ratio;
 		texture_color = get_text_pixel(ray->texture,
 				ray->texture->texture_x, ray->texture->texture_y);
 		my_mlx_pixel_put(game, x, y + i, texture_color);

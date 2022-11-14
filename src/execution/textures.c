@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:38:34 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/12 00:55:25 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/14 07:56:15 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,8 @@ int	get_text_pixel(t_texture *texture, int x, int y)
 	return (color);
 }
 
-void	set_texture_coordonates(t_game *game, t_ray *ray, int base_draw,
-	int wall_height)
+void	set_texture_x_coordonates(t_game *game, t_ray *ray)
 {
-	ray->texture->texture_y = base_draw * (double)((double)(ray->texture->height_img)
-		/ (double)wall_height);
 	if (ray->texture->texture_id % 2 == 0)
 		ray->texture->texture_x = ((ray->x / 64.0f) - (int)(ray->x / 64.0f))
 			* ray->texture->width_img;
