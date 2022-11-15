@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/14 07:58:36 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:15:10 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_texture
 	int		width_img;
 	int		height_img;
 	int		texture_id;
-	int		texture_y;
-	int		texture_x;
+	double	texture_y;
+	double	texture_x;
 	double	ratio;
 }	t_texture;
 

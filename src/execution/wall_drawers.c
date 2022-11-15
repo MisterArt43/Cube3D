@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:19:42 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/14 08:02:42 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:27:49 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	draw_walls(t_game *game, t_raycast *raycast, t_ray *ray, int x)
 	set_texture_x_coordonates(game, ray);
 	ray->texture->ratio = (double)(ray->texture->height_img)
 		/ (double)wall_height;
-	if (wall_height > game->window_height)
-		wall_height = game->window_height;
+	// if (wall_height > game->window_height)
+	// 	wall_height = game->window_height;
 	y = game->window_height / 2 - wall_height / 2;
 	if (y < 0)
 		i = -y;
@@ -65,9 +65,9 @@ void	draw_walls(t_game *game, t_raycast *raycast, t_ray *ray, int x)
 	while (i < wall_height && y + i < game->window_height)
 	{
 		ray->texture->texture_y += ray->texture->ratio;
-		texture_color = get_text_pixel(ray->texture,
-				ray->texture->texture_x, ray->texture->texture_y);
-		my_mlx_pixel_put(game, x, y + i, texture_color);
+		my_mlx_pixel_put(game, x, y + i,
+			get_text_pixel(ray->texture,
+				ray->texture->texture_x, ray->texture->texture_y));
 		i++;
 	}
 }

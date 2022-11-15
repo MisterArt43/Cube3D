@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:38:34 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/14 07:56:15 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:21:19 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ int	get_text_pixel(t_texture *texture, int x, int y)
 {
 	int	color;
 
-	if (x < 0 || x >= texture->width_img
-		|| y < 0 || y >= texture->height_img)
+	if (!texture)
 		return (0);
-	color = (*(int *)texture->texture_addr + (y * texture->line_length)
-			+ (x * texture->bits_per_pixel / 8));
+	if (x < 0 || x >= texture->width_img || y < 0 || y >= texture->height_img)
+		return (0);
+	color = (*(int *)(texture->texture_addr + (x * texture->bits_per_pixel / 8)
+				+ (y * texture->line_length)));
 	return (color);
 }
 
