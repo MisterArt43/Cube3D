@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 03:23:42 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/13 03:23:42 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 15:48:53 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+# include <stdlib.h>
 
 void		skip_to_next_word(char *str, int *i);
 void		skip_to_eol_or_eof(char *str, int *i);

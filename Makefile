@@ -6,7 +6,7 @@
 #    By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/16 14:31:36 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/11/16 16:22:33 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 INCLUDES = includes/header.h
 
-CC = gcc -fsanitize=address -g
+CC = gcc
 RM = rm -f
 
 FLAGS = -O3

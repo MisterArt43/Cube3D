@@ -25,7 +25,7 @@
             "request": "launch",
             "program": "${fileDirname}/a.out",
             "preLaunchTask": "C/C++: gcc générer le fichier actif",
-            "args": ["/Users/victorducoulombier/Documents/dev/42/Cub3D/git/maps/debug.cub"]
+            "args": ["/Users/vducoulo/Documents/42/Cub/git_vducoulo/maps/default.cub"]
             // ,
             // "initCommands": [
             //     "command script import ${workspaceRoot}/debugvis.py"

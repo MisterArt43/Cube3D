@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:38:34 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/15 20:30:06 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:44:09 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,7 @@ int	all_textures_loader(t_game	*game, t_texture_info *all_textures)
 
 int	single_texture_loader(t_game *game, t_texture *texture, int texture_id)
 {
-	texture->xpm_path = "./sprites/stone.xpm";
 	texture->texture_id = texture_id;
-	texture->texture = mlx_xpm_file_to_image(game->mlx, texture->xpm_path,
-			&texture->width_img, &texture->height_img);
-	if (!texture->texture)
-		return (ERROR);
-	texture->texture_addr = mlx_get_data_addr(texture->texture,
-			&texture->bits_per_pixel, &texture->line_length, &texture->endian);
-	if (!texture->texture_addr)
-		return (ERROR);
 	return (0);
 }
 
@@ -60,7 +51,7 @@ int	get_text_pixel(t_texture *texture, int x, int y)
 		return (0);
 	if (x < 0 || x >= texture->width_img || y < 0 || y >= texture->height_img)
 		return (0);
-	color = (*(int *)(texture->texture_addr + (x * texture->bits_per_pixel / 8)
+	color = (*(int *)(texture->texture_addr + (x * texture->bits_per_pixel)
 				+ (y * texture->line_length)));
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 01:53:33 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 14:31:05 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:25:18 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	stop_mlx(t_game *game)
 {
 	//mlx_destroy_display(game->mlx);
-	free(game->mlx);
+	//free(game->mlx);
 }
 
 void	ft_ermap(char *str, void *ptr, t_game *game)

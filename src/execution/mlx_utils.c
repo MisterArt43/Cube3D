@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:16:40 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/27 17:10:34 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:31:58 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 	if (x < 0 || x > game->window_width - 1 || y < 0
 		|| y > game->window_height - 1)
 		return ;
-	dst = game->addr + (y * game->line_length + x * (game->bits_per_pixel / 8));
+	dst = game->addr + (y * game->line_length + x * (game->bits_per_pixel));
 	*(unsigned int *)dst = color;
 }

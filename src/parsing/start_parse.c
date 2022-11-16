@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:01:10 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 14:28:06 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:20:46 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	sort_parse(t_game *game, int type, int i)
 		else if (type == 4)
 			load_texture(game, game->all_textures->east_texture, &i);
 		else if (type == 5)
-			load_color(game, game->floor_color, &i, 0);
+			load_color(game, &game->floor_color, &i, 0);
 		else if (type == 6)
-			load_color(game, game->ceilling_color, &i, 0);
+			load_color(game, &game->ceilling_color, &i, 0);
 		else if (type == 7)
 			return (gen_tab(game, (game->fd_str + i)));
 		else if (type == 0)

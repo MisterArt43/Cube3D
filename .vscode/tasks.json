@@ -9,6 +9,8 @@
                 "-g",
                 "../../src/*.c",
                 "../../src/execution/*.c",
+                "../../src/parsing/*.c",
+                "../../src/utils/*.c",
                 "../../includes/*.h",
                 "../../libft/*.c",
                 "-Imlx -Ift",

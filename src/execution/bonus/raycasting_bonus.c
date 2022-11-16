@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:55:46 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 01:02:19 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:23:15 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	raycasting(t_game *game)
 		if (raycast->horizontal_ray->traveled_dst
 			<= raycast->vertical_ray->traveled_dst)
 		{
-			raycast->winning_ray = raycast->horizontal_ray;
-			//debug_draw_line(game, raycast->last_horiz_x, raycast->last_horiz_y, game->x, game->y, 0x1500FF); //blueray	
+			//raycast->winning_ray = raycast->horizontal_ray;
+			debug_draw_line(game, raycast->last_horiz_x, raycast->last_horiz_y, game->x, game->y, 0x1500FF); //blueray	
 		}
 		else
 		{
-			raycast->winning_ray = raycast->vertical_ray;
-			//debug_draw_line(game, raycast->last_vert_x, raycast->last_vert_y, game->x, game->y, 0x9EFF00); //yellowray		
+			//raycast->winning_ray = raycast->vertical_ray;
+			debug_draw_line(game, raycast->last_vert_x, raycast->last_vert_y, game->x, game->y, 0x9EFF00); //yellowray		
 		}
 		//draw_walls(game, raycast, raycast->winning_ray, i);
 		raycast->ray_angle = assure_360_deg_angle(raycast->ray_angle - (DR * 25)

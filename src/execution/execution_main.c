@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:26:51 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 10:50:58 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:23:00 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	event_handler(t_game *game)
 
 void	game_renderer(t_game *game)
 {
-	game_grid_drawer(game);
+	//game_grid_drawer(game);
 	mlx_hook(game->mlx_win, 2, 1L << 0, hook_key_press_handler, game);
 	mlx_hook(game->mlx_win, 17, 1L << 0, free_and_exit, game);
 	mlx_hook(game->mlx_win, 3, 1L << 1, hook_key_release_handler, game);

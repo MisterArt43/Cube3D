@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:14:58 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 08:14:58 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 15:18:33 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	get_dimension(int *h, int *w, char *str)
 			i++;
 		}
 		biggest++;
-		i++;
+		if (str[i])
+			i++;
 	}
 }
 

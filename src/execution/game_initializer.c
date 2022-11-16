@@ -6,11 +6,19 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 14:41:12 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:48:18 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
+
+void	texture_id_attributor(t_texture_info *alltextures)
+{
+	alltextures->north_texture->texture_id = 2;
+	alltextures->south_texture->texture_id = 4;
+	alltextures->east_texture->texture_id = 3;
+	alltextures->west_texture->texture_id = 1;
+}
 
 t_game	*game_initializer(char *map_path)
 {
@@ -19,13 +27,14 @@ t_game	*game_initializer(char *map_path)
 	game = (t_game *)ft_calloc(1, sizeof(t_game));
 	if (!game)
 		return (NULL);
-	game->window_width = 1200;
-	game->window_height = 800;
+	game->window_width = 2048;
+	game->window_height = 1024;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (free(game), exit(EXIT_FAILURE), NULL);
 	game->all_textures = textures_initializer(game); // malloc à protéger
 	start_parse(map_path, game);
+	texture_id_attributor(game->all_textures);
 	game->mlx_win = mlx_new_window(game->mlx, game->window_width,
 			game->window_height,
 			"Cub3D");
@@ -43,6 +52,7 @@ t_game	*game_initializer(char *map_path)
 	game->player_delta_x = cos(game->player_angle) * 5;
 	game->player_delta_y = sin(game->player_angle) * 5;
 	game->raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
+	printf("\n basetxt_id : %d \n", game->all_textures->west_texture->texture_id);
 	if (!game->raycast)
 		return (NULL);
 	return (game);

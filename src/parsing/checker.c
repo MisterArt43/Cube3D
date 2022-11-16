@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:49:33 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 08:02:24 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 15:55:22 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	check_player_pos(t_game *game, int i, int j)
 	if (game->game_tab[i][j] == 'N' - '0' || game->game_tab[i][j] == 'E' - '0' \
 	|| game->game_tab[i][j] == 'W' - '0' || game->game_tab[i][j] == 'S' - '0')
 	{
-		game->game_tab[i][j] = 0;
 		game->x = i * 50;
 		game->y = j * 50;
 		if (game->game_tab[i][j] == 'N' - '0')
@@ -103,6 +102,7 @@ void	check_player_pos(t_game *game, int i, int j)
 			game->player_angle = M_PI;
 		else if (game->game_tab[i][j] == 'S' - '0')
 			game->player_angle = (2 * M_PI) / 2;
+		game->game_tab[i][j] = 0;
 	}
 }
 
