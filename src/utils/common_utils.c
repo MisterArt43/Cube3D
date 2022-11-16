@@ -6,21 +6,11 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 01:49:31 by abucia            #+#    #+#             */
-/*   Updated: 2022/10/23 01:49:31 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 08:16:43 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
-
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while(str[i])
-		i++;
-	return (i);
-}
 
 char	*ft_freestrjoin(char *s1, char *s2)
 {
@@ -65,70 +55,33 @@ int	ft_nstrncmp(const char *s1, const char *s2, size_t n, size_t start)
 	return ((unsigned char)s1[start] - (unsigned char)s2[start]);
 }
 
-int	ft_putstr_fd(char *str, int fd)
+void	skip_to_next_word(char *str, int *i)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	while (str[*i])
 	{
-		if (write(fd, &str[i], 1) == -1)
+		if (str[*i] != ' ' && str[*i] != '\t' && str[*i] != '\r')
 			break ;
-		i++;
+		*i += 1;
 	}
-	return (0);
 }
 
-void	*ft_memset(void *s, int c, size_t n)
+void	skip_to_eol_or_eof(char *str, int *i)
 {
-	size_t	a;
-
-	a = 0;
-	while (n != a)
+	while (str[*i])
 	{
-		((unsigned char *)s)[a] = c;
-		a++;
+		if (str[*i] == '\n' || str[*i] == '\0')
+			break ;
+		*i += 1;
 	}
-	return ((unsigned char *)s);
 }
 
-char	*ft_strdup(const char *s1)
+void	skip_to_next_parse(t_game *game, int *i)
 {
-	char	*cpy;
-	size_t	i;
-
-	i = 0;
-	cpy = malloc((ft_strlen(s1) + 1) * sizeof(char));
-	if (!cpy)
-		return (NULL);
-	while (s1[i])
+	while (game->fd_str[*i])
 	{
-		cpy[i] = s1[i];
-		i++;
+		skip_to_next_word(game->fd_str, i);
+		if (game->fd_str[*i] != '\n')
+			break ;
+		(*i)++;
 	}
-	cpy[i] = 0;
-	return (cpy);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t		i;
-	char		*res;
-
-	i = 0;
-	if ((int)start > ft_strlen(s) + 1)
-		return (ft_strdup(""));
-	while (s[start + i] && i != len)
-		i++;
-	res = malloc((i + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (len != 0 && s[start])
-	{
-		res[i++] = s[start++];
-		len--;
-	}
-	res[i] = 0;
-	return (res);
 }

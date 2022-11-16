@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 01:53:33 by abucia            #+#    #+#             */
-/*   Updated: 2022/10/23 01:53:33 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 05:21:46 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	stop_mlx(t_game *game)
 {
 	mlx_destroy_display(game->mlx);
+	free(game->mlx);
 }
 
 void	ft_ermap(char *str, void *ptr, t_game *game)
@@ -24,6 +25,9 @@ void	ft_ermap(char *str, void *ptr, t_game *game)
 
 	if (ptr != NULL)
 		free(ptr);
+	if (ISLINUX == 1)
+		stop_mlx(game);
+	free(game);
 	i = 0;
 	write(2, "Error\n", 6);
 	if (!str)
