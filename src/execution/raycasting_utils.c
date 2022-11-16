@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:02:24 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/11 11:36:47 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 01:00:41 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ void	raycasting_angle_interpeter(int vertical, t_game *game, t_ray *ray,
 
 double	assure_360_deg_angle(double a)
 {
-	if (a >= ((double)2 * M_PI))
-		a -= ((double)2 * M_PI);
+	double	two_pi;
+
+	two_pi = 2 * M_PI;
+	if (a >= two_pi)
+		a -= (two_pi);
 	if (a < 0)
-		a += ((double)2 * M_PI);
+		a += (two_pi);
 	return (a);
 }

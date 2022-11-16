@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:52:35 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/03 17:00:11 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:29:56 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ int	**tmp_game_tab_feeder(char *map, t_game *game)
 		while (x < game->game_tab_width)
 		{
 			tab[y][x] = m_line[x] - '0';
-			if (DEBUG > 0)
-				ft_printf ("%d", tab[y][x]);
 			x ++;
 		}
-		ft_printf("\n");
 		y ++;
 	}
 	return (tab);

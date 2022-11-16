@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:38:34 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/15 15:21:19 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:30:06 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,6 @@ int	single_texture_loader(t_game *game, t_texture *texture, int texture_id)
 			&texture->bits_per_pixel, &texture->line_length, &texture->endian);
 	if (!texture->texture_addr)
 		return (ERROR);
-	if (DEBUG == 1)
-		ft_printf("\n texture %s successfully loaded",
-			ft_strrchr(texture->xpm_path, '/'));
 	return (0);
 }
 

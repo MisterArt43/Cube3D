@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/15 15:15:10 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 00:49:04 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,18 @@ typedef struct s_ray {
 	int			map_x;
 	int			map_y;
 	int			depth_of_field;
-	int			traveled_dst;
+	float		traveled_dst;
 }	t_ray;
 
 typedef struct s_raycast {
 	int			ray_count;
 	double		ray_angle;
-	double		ray_y; //deleted
-	double		ray_x; //deleted
-	double		ray_x_offset; //deleted
-	double		ray_y_offset; //deleted
-	int			depth_of_field; //deleted
 	int			map_x;
 	int			map_y;
 	int			map_pos;
-	double		traveled_horiz; //deleted
-	double		traveled_vert; //deleted
-	double		min_traveled; //deleted
-	double		last_horiz_x; //deleted
-	double		last_horiz_y; //deleted
-	double		last_vert_x; //deleted
-	double		last_vert_y; //deleted
-	t_ray		*horizontal_ray;
-	t_ray		*vertical_ray;
+	t_ray		horizontal_ray;
+	t_ray		vertical_ray;
 	t_ray		*winning_ray;
-	t_texture	*horiz_ray_texture; //deleted
-	t_texture	*vert_ray_texture; //deleted
 }	t_raycast;
 
 typedef struct s_game {

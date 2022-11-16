@@ -6,7 +6,7 @@
 #    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/10 17:44:36 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/11/15 22:44:32 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 INCLUDES = headers/cub3d.h
 
-CC = gcc -fsanitize=address -g
+CC = gcc
 RM = rm -f
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -O3
 
 all: lib ${NAME}
 
