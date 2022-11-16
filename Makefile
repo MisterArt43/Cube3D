@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/15 22:44:32 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/11/16 14:31:36 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,13 @@ SRCS_GLOBAL = 	src/main.c \
 				src/execution/raycasting_collisions_checker.c  \
 				src/execution/wall_drawers.c \
 				src/execution/textures.c \
+				src/parsing/start_parse.c \
+				src/parsing/checker.c \
+				src/parsing/make_map.c \
+				src/parsing/parse_texture_and_color.c \
+				src/utils/parsing_utils.c \
+				src/utils/common_utils.c \
+				src/utils/ft_parse_error.c \
 
 SRCS_MANDATORY = 
 
@@ -41,12 +48,12 @@ OBJS_GLOBAL = ${SRCS_GLOBAL:.c=.o}
 OBJS_MANDATORY = ${SRCS_MANDATORY:.c=.o}
 OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
-INCLUDES = headers/cub3d.h
+INCLUDES = includes/header.h
 
-CC = gcc
+CC = gcc -fsanitize=address -g
 RM = rm -f
 
-FLAGS = -Wall -Wextra -Werror -O3
+FLAGS = -O3
 
 all: lib ${NAME}
 

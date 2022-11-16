@@ -6,13 +6,13 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 12:49:08 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 14:26:09 by vducoulo         ###   ########.fr       */
+/*   Updated: 2021/11/15 13:46:03 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str, int *nb)
+int	ft_atoi(const char *str)
 {
 	int		sign;
 	size_t	i;
@@ -35,6 +35,5 @@ int	ft_atoi(const char *str, int *nb)
 		r = r * 10 + str[i] - '0';
 		i++;
 	}
-	*nb += i;
 	return (r * sign);
 }
