@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 14:12:37 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:41:12 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_game	*game_initializer(char *map_path)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (free(game), exit(EXIT_FAILURE), NULL);
+	game->all_textures = textures_initializer(game); // malloc à protéger
 	start_parse(map_path, game);
 	game->mlx_win = mlx_new_window(game->mlx, game->window_width,
 			game->window_height,
@@ -44,7 +45,6 @@ t_game	*game_initializer(char *map_path)
 	game->raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
 	if (!game->raycast)
 		return (NULL);
-	//game->all_textures = textures_initializer(game); // malloc à protéger
 	return (game);
 }
 
