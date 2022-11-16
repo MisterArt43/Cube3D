@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:30:31 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/03 13:29:42 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:42:43 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	player_move_forward(t_game *game)
 {
 	game->x += game->player_delta_x;
 	game->y += game->player_delta_y;
-	//ft_print_five('y', 0, game);
 	my_mlx_pixel_put(game, game->x, game->y, 0xd4d8fa);
 	return ;
 }
@@ -25,21 +24,19 @@ void	player_move_backward(t_game *game)
 {
 	game->x -= game->player_delta_x;
 	game->y -= game->player_delta_y;
-	//ft_print_five('y', 1, game);
 	my_mlx_pixel_put(game, game->x, game->y, 0xd4d8fa);
 	return ;
 }
 
 void	player_turn_right(t_game *game)
 {
-	player_rotate_right(game);
-	//ft_print_five('x', 1, game);
+	game->x -= game->player_delta_x * 5;
 	return ;
 }
 
 void	player_turn_left(t_game *game)
 {
-	player_rotate_left(game);
+	game->y -= game->player_delta_y * 5;
 	//ft_print_five('x', 0, game);
 	return ;
 }
