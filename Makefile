@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+         #
+#    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/16 16:22:33 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/11/17 22:35:26 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRCS_GLOBAL = 	src/main.c \
 				src/execution/mlx_utils.c \
 				src/execution/game_initializer.c \
 				src/execution/user_inputs.c \
-				src/execution/debug.c \
 				src/execution/utils.c \
 				src/execution/tmp_game_tab_feeder.c \
 				src/execution/game_grid_drawer.c \
@@ -31,6 +30,7 @@ SRCS_GLOBAL = 	src/main.c \
 				src/execution/raycasting_player_angle_adapters.c \
 				src/execution/raycasting_collisions_checker.c  \
 				src/execution/wall_drawers.c \
+				src/execution/player_movements_utils.c \
 				src/execution/textures.c \
 				src/parsing/start_parse.c \
 				src/parsing/checker.c \

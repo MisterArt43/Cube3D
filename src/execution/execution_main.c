@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:26:51 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 17:29:28 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:07:44 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 void	event_handler(t_game *game)
 {
-	//set_mlx_background(game);
-	//game_grid_drawer(game);
 	move_my_player(game);
-	//debug_draw_line(game, game->x, game->y, game->x + game->player_delta_x * 50, game->y + game->player_delta_y * 50, 0xFFFF00);
 	draw_floor_and_ceilling(game);
 	raycasting(game);
+	if (BONUS)
+	{
+		game_grid_drawer(game);
+		print_player_position(game);
+	}
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	return ;
 }
 
 void	game_renderer(t_game *game)
 {
-	//game_grid_drawer(game);
 	mlx_hook(game->mlx_win, 2, 1L << 0, hook_key_press_handler, game);
 	mlx_hook(game->mlx_win, 17, 1L << 0, free_and_exit, game);
 	mlx_hook(game->mlx_win, 3, 1L << 1, hook_key_release_handler, game);

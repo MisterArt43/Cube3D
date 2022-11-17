@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:02:24 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 01:00:41 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:21:30 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ int	is_in_map_limits(t_game *game, int x, int y)
 {
 	if ((x >= 0 && y >= 0) && x < game->game_tab_width
 		&& y < game->game_tab_height)
+		return (1);
+	return (0);
+}
+
+int	is_in_window_limits(t_game *game, float x, float y)
+{
+	if (x > 0 && x <= game->window_width
+		&& y > 0 && y <= game->window_height)
 		return (1);
 	return (0);
 }

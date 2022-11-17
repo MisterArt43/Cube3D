@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 14:20:47 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:26:59 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ typedef struct s_game {
 	int				endian;
 	int				window_width;
 	int				window_height;
-	int				x;
-	int				y;
+	float			x;
+	float			y;
 	double			player_delta_x;
 	double			player_delta_y;
 	double			player_angle;
@@ -146,6 +146,9 @@ int				get_text_pixel(t_texture *texture, int x, int y);
 void			check_ray_collision(t_raycast *raycast, t_ray *ray,
 					t_game *game, int vertical);
 void			set_texture_x_coordonates(t_game *game, t_ray *ray);
+int				is_in_window_limits(t_game *game, float x, float y);
+void			print_player_position(t_game *game);
+int				is_wall_coliding(t_game *game, float x, float y);
 
 // debug
 

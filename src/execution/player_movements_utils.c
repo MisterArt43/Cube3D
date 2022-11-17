@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   player_movements_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:39:05 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/17 22:33:22 by vducoulo         ###   ########.fr       */
+/*   Created: 2022/11/17 22:18:28 by vducoulo          #+#    #+#             */
+/*   Updated: 2022/11/17 22:24:55 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
-# include "../libft/libft.h"
-# include "execution.h"
-# include "parsing.h"
-# include <unistd.h>
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
+#include "../../includes/header.h"
 
-# define DEBUG 1
-# define ERROR -1
-# define BONUS 1
-# define PI 3.1415926535897932384
-# ifdef __linux__
-#  define ISLINUX 1
-# else
-#  define ISLINUX 0
-# endif
-#endif
+int	is_wall_coliding(t_game *game, float x, float y)
+{
+	if (!is_in_window_limits(game, x, y))
+		return (1);
+	if (game->game_tab[(int)y / game->game_cell_size][(int)x
+		/ game->game_cell_size] == 1)
+		return (1);
+	return (0);
+}

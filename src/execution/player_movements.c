@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:30:31 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 17:42:43 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:32:53 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,61 @@
 
 void	player_move_forward(t_game *game)
 {
-	game->x += game->player_delta_x;
-	game->y += game->player_delta_y;
-	my_mlx_pixel_put(game, game->x, game->y, 0xd4d8fa);
+	float	new_x;
+	float	new_y;
+
+	new_x = game->x + game->player_delta_x * 2;
+	new_y = game->y + game->player_delta_y * 2;
+	if (BONUS != 1 || !is_wall_coliding(game, new_x, new_y))
+	{
+		game->x += game->player_delta_x * 2;
+		game->y += game->player_delta_y * 2;
+	}
 	return ;
 }
 
 void	player_move_backward(t_game *game)
 {
-	game->x -= game->player_delta_x;
-	game->y -= game->player_delta_y;
-	my_mlx_pixel_put(game, game->x, game->y, 0xd4d8fa);
-	return ;
-}
+	float	new_x;
+	float	new_y;
 
-void	player_turn_right(t_game *game)
-{
-	game->x -= game->player_delta_x * 5;
+	new_x = game->x - game->player_delta_x * 2;
+	new_y = game->y - game->player_delta_y * 2;
+	if (BONUS != 1 || !is_wall_coliding(game, new_x, new_y))
+	{
+		game->x -= game->player_delta_x * 2;
+		game->y -= game->player_delta_y * 2;
+	}
 	return ;
 }
 
 void	player_turn_left(t_game *game)
 {
-	game->y -= game->player_delta_y * 5;
-	//ft_print_five('x', 0, game);
+	float	new_x;
+	float	new_y;
+
+	new_x = game->x + cos(game->player_angle + M_PI / 2) * 5;
+	new_y = game->y + sin(game->player_angle + M_PI / 2) * 5;
+	if (BONUS != 1 || !is_wall_coliding(game, new_x, new_y))
+	{
+		game->x += cos(game->player_angle + M_PI / 2) * 5;
+		game->y += sin(game->player_angle + M_PI / 2) * 5;
+	}
+	return ;
+}
+
+void	player_turn_right(t_game *game)
+{
+	float	new_x;
+	float	new_y;
+
+	new_x = game->x + cos(game->player_angle - M_PI / 2) * 5;
+	new_y = game->y + sin(game->player_angle - M_PI / 2) * 5;
+	if (BONUS != 1 || !is_wall_coliding(game, new_x, new_y))
+	{
+		game->x += cos(game->player_angle - M_PI / 2) * 5;
+		game->y += sin(game->player_angle - M_PI / 2) * 5;
+	}
 	return ;
 }
 
