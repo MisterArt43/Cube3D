@@ -6,7 +6,7 @@
 #    By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/18 14:36:17 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/11/18 15:39:58 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,10 @@ OBJS_MANDATORY = ${SRCS_MANDATORY:.c=.o}
 OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 INCLUDES = includes/header.h libft/libft.h includes/execution.h includes/parsing.h
-CC = gcc #-g3 #-fsanitize=address
+CC = gcc -g3 #-fsanitize=address
 RM = rm -f
 
-FLAGS = -O3 -Wall -Wextra -Werror #-g3 
+FLAGS = -O3 -Wall -Wextra -Werror
 
 all: lib ${NAME}
 

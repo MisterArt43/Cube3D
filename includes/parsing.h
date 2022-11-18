@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 03:23:42 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 15:48:53 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:18:55 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		start_parse(char *map_file, t_game *game);
 void		stop_mlx(t_game *game);
 void		ft_ermap(char *str, void *ptr, t_game *game);
 void		read_error(int fd, char *str, char *er, t_game *game);
-char		*ft_readall(int fd, t_game *game);
+char		*ft_readall(int fd, t_game *game, int i);
 char		*ft_freestrjoin(char *s1, char *s2);
 int			ft_nstrncmp(const char *s1, const char *s2, size_t n, size_t start);
 void		check_map_extension(t_game *game, int i, int j);

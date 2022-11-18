@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_quitters.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:31:59 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/10/26 22:28:59 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:45:50 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,4 @@ void	free_my_game(t_game *game)
 	stop_mlx(game);
 	if (game->raycast)
 		free(game->raycast);
-	free(game);
 }

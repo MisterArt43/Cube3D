@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/18 13:56:37 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2022/11/18 15:25:32 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ int				ft_stop_mlx(t_game *game);
 int				render_next_frame(t_game *game);
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
 int				hook_key_press_handler(int keycode, t_game *game);
-t_game			*game_initializer(char *map_path);
+void			game_initializer(char *map_path, t_game *game);
 void			execution_launcher(char *map);
 void			free_and_exit(t_game *game, int exit_status);
 void			free_my_game(t_game *game);
-void			game_renderer(t_game *game);
+void			game_renderer(t_game game);
 void			vd_cube_drawer(t_game *game, t_vector2d *top_left,
 					t_vector2d *bottom_right, int color);
 void			game_grid_drawer(t_game *game);

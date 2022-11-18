@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 16:48:18 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:20:38 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,12 @@ void	null_game_struct(t_game *game)
 	game->raycast = NULL;
 }
 
-t_game	*game_initializer(char *map_path)
+void	game_initializer(char *map_path, t_game *game)
 {
-	t_game	*game;
-
-	game = (t_game *)ft_calloc(1, sizeof(t_game));
-	if (!game)
-		return (NULL);
 	null_game_struct(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (free(game), exit(EXIT_FAILURE), NULL);
+		exit(EXIT_FAILURE);
 	game->all_textures = textures_initializer();
 	if (!game->all_textures)
 		free_and_exit(game, EXIT_FAILURE);
@@ -70,6 +65,5 @@ t_game	*game_initializer(char *map_path)
 	game->player_delta_y = sin(game->player_angle) * 5;
 	game->raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
 	if (!game->raycast)
-		return (NULL);
-	return (game);
+		return ;
 }

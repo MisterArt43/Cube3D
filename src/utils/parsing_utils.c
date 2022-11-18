@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 01:53:33 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/18 13:53:07 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2022/11/18 16:25:48 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_ermap(char *str, void *ptr, t_game *game)
 	if (ptr != NULL)
 		free(ptr);
 	stop_mlx(game);
-	free(game);
 	i = 0;
 	write(2, "Error\n", 6);
 	if (!str)
@@ -49,11 +48,10 @@ void	read_error(int fd, char *str, char *er, t_game *game)
 	ft_ermap(er, str, game);
 }
 
-char	*ft_readall(int fd, t_game *game)
+char	*ft_readall(int fd, t_game *game, int i)
 {
 	char	*all;
 	char	*buffer;
-	int		i;
 
 	if (fd == -1)
 		ft_ermap("can't open this file\n", NULL, game);
@@ -61,7 +59,6 @@ char	*ft_readall(int fd, t_game *game)
 	buffer = malloc((17) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	i = 1;
 	while (i != 0)
 	{
 		i = read(fd, buffer, 16);
@@ -75,5 +72,7 @@ char	*ft_readall(int fd, t_game *game)
 			"an error occurred while reading the file\n", game);
 	}
 	free(buffer);
+	if (all[ft_strlen(all) - 1] != '\n')
+		return (ft_freestrjoin(all, "\n"));
 	return (all);
 }

@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:14:58 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 15:18:33 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:11:37 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,12 @@ void	gen_tab(t_game *game, char *str)
 	{
 		game->game_tab[i] = fill_tab(game, str, i, 0);
 		i++;
+	}
+	if ((game->game_tab_height < 3 || game->game_tab_width < 3) && \
+	txt_stop_all(game))
+	{
+		free_map(game->game_tab, game->game_tab_height - 1);
+		ft_ermap("invalide map size\n", game->fd_str, game);
 	}
 	check_map_extension(game, 1, 1);
 }
