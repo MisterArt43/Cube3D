@@ -3,17 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/18 14:05:28 by abucia           ###   ########lyon.fr    #
+#    Updated: 2022/11/18 14:36:17 by vducoulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-NAME_BONUS = cub3D_bonus
 
+BONUS = 0
+C_BONUS = -D BONUS=${BONUS}
+NAME_BONUS = cub3D_bonus
 SRCS_GLOBAL =	src/main.c \
 				src/execution/execution_main.c \
 				src/execution/game_quitters.c \
@@ -45,28 +47,29 @@ OBJS_MANDATORY = ${SRCS_MANDATORY:.c=.o}
 OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 INCLUDES = includes/header.h libft/libft.h includes/execution.h includes/parsing.h
-
 CC = gcc #-g3 #-fsanitize=address
 RM = rm -f
 
 FLAGS = -O3 -Wall -Wextra -Werror #-g3 
 
 all: lib ${NAME}
-	@echo "${UNAME_S}"
 
-bonus: lib ${NAME_BONUS}
+bonus: 
+	make -C ./ bb BONUS=1
+
+bb: lib ${NAME_BONUS}
 
 $(NAME): ${OBJS_GLOBAL} ${OBJS_MANDATORY}
-	${CC} ${OBJS_GLOBAL} ${OBJS_MANDATORY} ${MLX_FLAG} -D BONUS=0 -o $(NAME)
+	${CC}  -D BONUS=0 ${OBJS_GLOBAL} ${OBJS_MANDATORY} ${MLX_FLAG} -o $(NAME)
 
 ${NAME_BONUS}: ${OBJS_GLOBAL} ${OBJS_BONUS}
-	${CC} ${OBJS_GLOBAL} ${OBJS_BONUS} ${MLX_FLAG} -D BONUS=1 -o $(NAME_BONUS)
+	${CC}  -D BONUS=1 ${OBJS_GLOBAL} ${OBJS_BONUS} ${MLX_FLAG} -o $(NAME_BONUS)
 
 MLX_FLAG = -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
 MLX = mlx/mlx_mac
 
 %.o: %.c ${INCLUDES} Makefile
-	${CC} ${FLAGS} -Imlx -Ift -c $< -o $@
+	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@
 
 clean:
 	${RM} ${OBJS_GLOBAL} ${OBJS_MANDATORY} ${OBJS_BONUS}
