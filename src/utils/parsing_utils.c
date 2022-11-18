@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 01:53:33 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 15:25:18 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:53:07 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	stop_mlx(t_game *game)
 {
 	if (ON_LINUX)
 	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
+		game->x = 1;
 	}
 }
 

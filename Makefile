@@ -6,7 +6,7 @@
 #    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/10 17:44:36 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/11/18 14:05:28 by abucia           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,14 +44,15 @@ OBJS_GLOBAL = ${SRCS_GLOBAL:.c=.o}
 OBJS_MANDATORY = ${SRCS_MANDATORY:.c=.o}
 OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
-INCLUDES = includes/header.h
+INCLUDES = includes/header.h libft/libft.h includes/execution.h includes/parsing.h
 
 CC = gcc #-g3 #-fsanitize=address
 RM = rm -f
 
-FLAGS = -Wall -Wextra -Werror #-g3 
+FLAGS = -O3 -Wall -Wextra -Werror #-g3 
 
 all: lib ${NAME}
+	@echo "${UNAME_S}"
 
 bonus: lib ${NAME_BONUS}
 
@@ -61,22 +62,15 @@ $(NAME): ${OBJS_GLOBAL} ${OBJS_MANDATORY}
 ${NAME_BONUS}: ${OBJS_GLOBAL} ${OBJS_BONUS}
 	${CC} ${OBJS_GLOBAL} ${OBJS_BONUS} ${MLX_FLAG} -D BONUS=1 -o $(NAME_BONUS)
 
-UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S), Linux)
-		MLX_FLAG += -Llibft -lft -Lmlx -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-		MLX += mlx/mlx_linux
-	endif
-	ifeq ($(UNAME_S), Darwin)
-		MLX_FLAG += -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
-		MLX += mlx/mlx_mac
-	endif
+MLX_FLAG = -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
+MLX = mlx/mlx_mac
 
 %.o: %.c ${INCLUDES} Makefile
 	${CC} ${FLAGS} -Imlx -Ift -c $< -o $@
 
 clean:
 	${RM} ${OBJS_GLOBAL} ${OBJS_MANDATORY} ${OBJS_BONUS}
-	make clean -C mlx/mlx_linux
+	make clean -C mlx/mlx_mac
 	make clean -C libft
 
 fclean: clean
@@ -84,7 +78,7 @@ fclean: clean
 	make fclean -C libft
 
 lib:
-	make -C mlx/mlx_linux
+	make -C mlx/mlx_mac
 	make -C libft
 
 re:    fclean all

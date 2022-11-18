@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 14:20:47 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:56:37 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct s_game {
 	int				endian;
 	int				window_width;
 	int				window_height;
-	int				x;
-	int				y;
+	float			x;
+	float			y;
 	double			player_delta_x;
 	double			player_delta_y;
 	double			player_angle;
