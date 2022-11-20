@@ -6,7 +6,7 @@
 #    By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/20 00:45:40 by abucia           ###   ########lyon.fr    #
+#    Updated: 2022/11/20 00:57:25 by abucia           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,16 +62,16 @@ $(NAME): ${OBJS_GLOBAL}
 	${CC} ${OBJS_GLOBAL} ${MLX_FLAG} -o $(NAME)
 
 ${NAME_BONUS}: ${OBJS_BONUS}
-	${CC} ${OBJS_GLOBAL} ${OBJS_BONUS} ${MLX_FLAG} -o $(NAME_BONUS)
+	${CC} ${OBJS_BONUS} ${MLX_FLAG} -o $(NAME_BONUS)
 
 MLX_FLAG = -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
 MLX = mlx/mlx_mac
 
 %.o: %.c ${INCLUDES} Makefile
-	@if [ "$(BONUS)" = "0" ]; \
-	then ${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@; \
-	else ${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@_bonus; \
-	fi
+	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@;
+
+%_bonus.o: %.c ${INCLUDES} Makefile
+	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@;
 
 clean:
 	@${RM} ${OBJS_GLOBAL} ${OBJS_BONUS}
