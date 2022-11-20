@@ -12,7 +12,6 @@
 
 NAME = cub3D
 
-
 BONUS = 0
 C_BONUS = -D BONUS=${BONUS}
 NAME_BONUS = cub3D_bonus
@@ -51,7 +50,19 @@ RM = rm -f
 
 FLAGS = -Wall -Wextra -Werror -O3
 
+MLX_FLAG = -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
+MLX = mlx/mlx_mac
+
 all: lib ${NAME}
+UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        MLX_FLAG = -Llibft -lft -Lmlx -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+		MLX = mlx/mlx_linux
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        MLX_FLAG = -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
+		MLX = mlx/mlx_mac
+    endif
 
 bonus:
 	make -C ./ bb BONUS=1
@@ -64,8 +75,6 @@ $(NAME): ${OBJS_GLOBAL}
 ${NAME_BONUS}: ${OBJS_BONUS}
 	${CC} ${OBJS_BONUS} ${MLX_FLAG} -o $(NAME_BONUS)
 
-MLX_FLAG = -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
-MLX = mlx/mlx_mac
 
 %.o: %.c ${INCLUDES} Makefile
 	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@;
@@ -74,18 +83,18 @@ MLX = mlx/mlx_mac
 	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@;
 
 clean:
-	@${RM} ${OBJS_GLOBAL} ${OBJS_BONUS}
-	make clean -C mlx/mlx_mac
-	make fclean -C libft
+	${RM} ${OBJS_GLOBAL} ${OBJS_BONUS}
+	make clean -C ${MLX}
+	make clean -C libft
 
 fclean: clean
 	${RM} ${NAME} ${NAME_BONUS}
 	make fclean -C libft
 
 lib:
-	make -C mlx/mlx_mac
+	make -C ${MLX}
 	make -C libft
 
 re:    fclean all
-		 
+
 .PHONY: all clean fclean re NAME bonus
