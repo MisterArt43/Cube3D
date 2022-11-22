@@ -29,8 +29,7 @@ void	ft_ermap(char *str, void *ptr, t_game *game)
 		free(ptr);
 	stop_mlx(game);
 	i = 0;
-	write(2, "Error\n", 6);
-	if (!str)
+	if (write(2, "Error\n", 6) != -1 && !str)
 		exit(EXIT_FAILURE);
 	while (str[i])
 	{

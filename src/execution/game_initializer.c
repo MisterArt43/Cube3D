@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_initializer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/18 15:20:38 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:41:37 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void	null_game_struct(t_game *game)
 
 void	game_initializer(char *map_path, t_game *game)
 {
+	game->movement_tab[0] = 0;
+	game->movement_tab[1] = 0;
+	game->movement_tab[2] = 0;
+	game->movement_tab[3] = 0;
+	game->movement_tab[4] = 0;
+	game->movement_tab[5] = 0;
 	null_game_struct(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)

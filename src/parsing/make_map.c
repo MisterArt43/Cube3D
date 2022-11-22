@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:14:58 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/18 16:11:37 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/19 23:37:11 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,19 @@ int	*fill_tab(t_game *game, char *str, int n, int j)
 	return (line);
 }
 
-void	check_all_before_gen_map(t_game *game)
+void	check_all_before_gen_map(t_game *game, char *str)
 {
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\n' && str[i] != '1' && str[i] != '0' \
+		&& str[i] != 'N' && str[i] != 'S' && str[i] != 'W' && str[i] != 'E' \
+		&& txt_stop_all(game))
+			ft_ermap("Invalid char in the map", game->fd_str, game);
+		i++;
+	}
 	if (game->all_textures->east_texture->texture && \
 	game->all_textures->west_texture->texture && \
 	game->all_textures->north_texture->texture && \
@@ -82,7 +93,7 @@ void	gen_tab(t_game *game, char *str)
 {
 	int	i;
 
-	check_all_before_gen_map(game);
+	check_all_before_gen_map(game, str);
 	i = 0;
 	while (*(str - 1) != '\n')
 		str--;

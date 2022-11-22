@@ -14,7 +14,7 @@
 
 void	raycasting_horizontal_looking_up(t_game *game, t_ray *ray)
 {
-	ray->y = (((int)game->y >> 6) << 6) - 0.0001;
+	ray->y = (((int)game->y >> 6) << 6) - 0.01;
 	ray->x = (game->y - ray->y) * ray->a_tan + game->x;
 	ray->y_offset = -game->game_cell_size;
 	ray->x_offset = -ray->y_offset * ray->a_tan;
@@ -52,7 +52,7 @@ void	raycasting_vertical_looking_right(t_game *game, t_ray *ray)
 
 void	raycasting_vertical_looking_left(t_game *game, t_ray *ray)
 {
-	ray->x = (((int)game->x >> 6) << 6) - 0.0001;
+	ray->x = (((int)game->x >> 6) << 6) - 0.01;
 	ray->y = (game->x - ray->x) * ray->a_tan + game->y;
 	ray->x_offset = -game->game_cell_size;
 	ray->y_offset = -ray->x_offset * ray->a_tan;

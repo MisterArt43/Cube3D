@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture_and_color.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:21:41 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 14:26:16 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/19 20:04:57 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	load_texture(t_game *game, t_texture *texture, int *i)
 {
 	int	sub;
 
+	if (texture->texture != NULL && txt_stop_all(game))
+		ft_ermap("Too many texture parameter\n", game->fd_str, game);
 	*i += 3;
 	skip_to_next_word(game->fd_str, i);
 	sub = *i;
@@ -49,6 +51,8 @@ void	load_texture(t_game *game, t_texture *texture, int *i)
 
 int	init_color(t_game *game, int *i, int (*color)[3], int nb)
 {
+	if ((*color)[nb] != -1 && txt_stop_all(game))
+		ft_ermap("Too many color parameter\n", game->fd_str, game);
 	(*color)[nb] = ft_atoi((game->fd_str + *i), i);
 	if ((*color)[nb] < 0 || (*color)[nb] > 255)
 	{

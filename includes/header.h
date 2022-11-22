@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:39:05 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/18 14:34:53 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/20 00:24:57 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 #  define BACKWARD 1
 #  define LEFT 0
 #  define RIGHT 2
-#  define ROT_RIGHT 124
-#  define ROT_LEFT 123
+#  define ROT_RIGHT 123
+#  define ROT_LEFT 124
 #  include "../mlx/mlx_mac/mlx.h"
 #  define ON_LINUX 0
 # endif
@@ -49,7 +49,7 @@
 # endif
 # define ERROR -1
 # ifndef BONUS
-#  define BONUS 1
+#  define BONUS 0
 # endif
 # define PI 3.1415926535897932384
 #endif
