@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:49:33 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 15:55:22 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/20 04:24:13 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
-
-// void	print_tab(t_game *game)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	j = 0;
-// 	printf("\nTAB FINAL : \n");
-// 	while (i != game->game_tab_height)
-// 	{
-// 		j = 0;
-// 		while (j != game->game_tab_width)
-// 		{
-// 			printf("%d",game->game_tab[i][j]);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 		i++;
-// 	}
-// }
 
 void	replace_to_zero(t_game *game)
 {
@@ -82,9 +61,10 @@ int	check_border(t_game *game)
 
 void	check_surronded_by_wall(t_game *game, int i, int j)
 {	
-	if (game->game_tab[i + 1][j] == 2 || game->game_tab[i - 1][j] == 2 || \
-	game->game_tab[i][j + 1] == 2 || game->game_tab[i][j - 1] == 2)
-		ft_ermap("map invalide\n", NULL, game);
+	if ((game->game_tab[i + 1][j] == 2 || game->game_tab[i - 1][j] == 2 || \
+	game->game_tab[i][j + 1] == 2 || game->game_tab[i][j - 1] == 2) && \
+	free_map(game->game_tab, game->game_tab_height - 1) && txt_stop_all(game))
+		ft_ermap("map invalide\n", game->fd_str, game);
 }
 
 void	check_player_pos(t_game *game, int i, int j)
@@ -92,8 +72,8 @@ void	check_player_pos(t_game *game, int i, int j)
 	if (game->game_tab[i][j] == 'N' - '0' || game->game_tab[i][j] == 'E' - '0' \
 	|| game->game_tab[i][j] == 'W' - '0' || game->game_tab[i][j] == 'S' - '0')
 	{
-		game->x = i * 50;
-		game->y = j * 50;
+		game->y = i * 64 + 32;
+		game->x = j * 64 + 32;
 		if (game->game_tab[i][j] == 'N' - '0')
 			game->player_angle = M_PI / 2;
 		else if (game->game_tab[i][j] == 'E' - '0')
@@ -108,8 +88,11 @@ void	check_player_pos(t_game *game, int i, int j)
 
 void	check_map_extension(t_game *game, int i, int j)
 {
-	if (check_border(game))
-		ft_ermap("bordure de map invalide\n", NULL, game);
+	game->x = -1;
+	game->y = -1;
+	if (check_border(game) && txt_stop_all(game) && \
+	free_map(game->game_tab, game->game_tab_height - 1))
+		ft_ermap("bordure de map invalide\n", game->fd_str, game);
 	while (i != game->game_tab_height - 1)
 	{
 		j = 1;
@@ -124,5 +107,9 @@ void	check_map_extension(t_game *game, int i, int j)
 		}
 		i++;
 	}
+	if ((game->x == -1 || game->game_tab_height < 3 || game->game_tab_width < \
+	3) && free_map(game->game_tab, game->game_tab_height - 1) && \
+	txt_stop_all(game))
+		ft_ermap("where is charli ?\n", game->fd_str, game);
 	replace_to_zero(game);
 }

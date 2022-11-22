@@ -14,7 +14,7 @@
 
 int	render_next_frame(t_game *game)
 {
-	//game_grid_drawer(game);
+	game_grid_drawer(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	return (0);
 }

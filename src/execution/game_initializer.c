@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_initializer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:21:20 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/16 16:48:18 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:41:37 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,10 @@ void	texture_id_attributor(t_texture_info *alltextures)
 	alltextures->west_texture->texture_id = 1;
 }
 
-t_game	*game_initializer(char *map_path)
+void	init_game_window(t_game *game)
 {
-	t_game	*game;
-
-	game = (t_game *)ft_calloc(1, sizeof(t_game));
-	if (!game)
-		return (NULL);
 	game->window_width = 2048;
 	game->window_height = 1024;
-	game->mlx = mlx_init();
-	if (!game->mlx)
-		return (free(game), exit(EXIT_FAILURE), NULL);
-	game->all_textures = textures_initializer(game); // malloc à protéger
-	start_parse(map_path, game);
-	texture_id_attributor(game->all_textures);
 	game->mlx_win = mlx_new_window(game->mlx, game->window_width,
 			game->window_height,
 			"Cub3D");
@@ -47,21 +36,40 @@ t_game	*game_initializer(char *map_path)
 		game->game_tab_max_encountred_cell = game->game_tab_width;
 	else
 		game->game_tab_max_encountred_cell = game->game_tab_height;
+}
+
+void	null_game_struct(t_game *game)
+{
+	game->all_textures = NULL;
+	game->img = NULL;
+	game->mlx_win = NULL;
+	game->game_tab = NULL;
+	game->raycast = NULL;
+}
+
+void	game_initializer(char *map_path, t_game *game)
+{
+	game->movement_tab[0] = 0;
+	game->movement_tab[1] = 0;
+	game->movement_tab[2] = 0;
+	game->movement_tab[3] = 0;
+	game->movement_tab[4] = 0;
+	game->movement_tab[5] = 0;
+	null_game_struct(game);
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		exit(EXIT_FAILURE);
+	game->all_textures = textures_initializer();
+	if (!game->all_textures)
+		free_and_exit(game, EXIT_FAILURE);
+	start_parse(map_path, game);
+	texture_id_attributor(game->all_textures);
+	init_game_window(game);
 	game->game_cell_size = 64;
 	game->displacement_speed = 4;
 	game->player_delta_x = cos(game->player_angle) * 5;
 	game->player_delta_y = sin(game->player_angle) * 5;
 	game->raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
-	printf("\n basetxt_id : %d \n", game->all_textures->west_texture->texture_id);
 	if (!game->raycast)
-		return (NULL);
-	return (game);
-}
-
-t_raycast	*raycast_initializer(t_game *game)
-{
-	t_raycast	*raycast;
-
-	raycast = (t_raycast *)ft_calloc(1, sizeof(t_raycast));
-	return (raycast);
+		return ;
 }

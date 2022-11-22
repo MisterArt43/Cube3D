@@ -27,8 +27,8 @@ int	is_in_map_limits(t_game *game, int x, int y)
 
 int	is_in_window_limits(t_game *game, float x, float y)
 {
-	if (x > 0 && x <= game->window_width
-		&& y > 0 && y <= game->window_height)
+	if (x > 0 && x / game->game_cell_size <= game->window_height
+		&& y > 0 && y / game->game_cell_size <= game->window_width)
 		return (1);
 	return (0);
 }
@@ -36,8 +36,6 @@ int	is_in_window_limits(t_game *game, float x, float y)
 void	raycasting_angle_interpeter(int vertical, t_game *game, t_ray *ray,
 	float ray_angle)
 {
-	float	a_tan;
-
 	ray_angle = assure_360_deg_angle(ray_angle);
 	if (!vertical)
 	{

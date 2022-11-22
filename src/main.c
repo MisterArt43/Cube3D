@@ -20,5 +20,5 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_putstr_fd("Error\nInvalid Argument, try :\n./cub3d <map.cub>\n", 2);
-	return (0);
+	return (EXIT_FAILURE);
 }

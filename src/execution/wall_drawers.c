@@ -46,15 +46,14 @@ void	draw_floor_and_ceilling(t_game *game)
 
 void	draw_walls(t_game *game, t_raycast *raycast, t_ray *ray, int x)
 {
-	int	wall_height;
-	int	texture_color;
-	int	y;
-	int	i;
+	float	wall_height;
+	int		y;
+	int		i;
 
 	i = 0;
 	remove_fisheye_effect(game, raycast, ray);
-	wall_height = 128 * game->window_height / ray->traveled_dst;
-	set_texture_x_coordonates(game, ray);
+	wall_height = 128 * (float)game->window_height / ray->traveled_dst;
+	set_texture_x_coordonates(ray);
 	ray->texture->ratio = (double)(ray->texture->height_img)
 		/ (double)wall_height;
 	y = game->window_height / 2 - wall_height / 2;

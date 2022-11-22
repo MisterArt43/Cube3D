@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:53:03 by vducoulo          #+#    #+#             */
-/*   Updated: 2022/11/17 22:26:59 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:28:03 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
-# include "../mlx/mlx_mac/mlx.h"
 
 # define DOF_DELIM 20
 # define DR 0.0174533
@@ -103,14 +102,15 @@ typedef struct s_vector2d {
 	int	y;
 }	t_vector2d;
 
+int				ft_stop_mlx(t_game *game);
 int				render_next_frame(t_game *game);
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
 int				hook_key_press_handler(int keycode, t_game *game);
-t_game			*game_initializer(char *map_path);
+void			game_initializer(char *map_path, t_game *game);
 void			execution_launcher(char *map);
 void			free_and_exit(t_game *game, int exit_status);
 void			free_my_game(t_game *game);
-void			game_renderer(t_game *game);
+void			game_renderer(t_game game);
 void			vd_cube_drawer(t_game *game, t_vector2d *top_left,
 					t_vector2d *bottom_right, int color);
 void			game_grid_drawer(t_game *game);
@@ -119,12 +119,14 @@ void			move_my_player(t_game *game);
 void			player_rotate_left(t_game *game);
 void			player_rotate_right(t_game *game);
 void			print_player_position(t_game *game);
-void			check_horizontal_ray_collision(t_raycast *raycast, t_ray *ray, t_game *game);
+void			check_horizontal_ray_collision(t_raycast *raycast, t_ray \
+*ray, t_game *game);
 int				is_in_map_limits(t_game *game, int x, int y);
 void			raycasting(t_game *game);
 t_raycast		*raycast_initializer(t_game *game);
 void			check_vertical_ray_collision(t_raycast *raycast, t_game *game);
-double			get_traveled_ray_distance(float ax, float ay, float bx, float by);
+double			get_traveled_ray_distance(float ax, float ay, float bx, \
+float by);
 int				is_in_map_limits(t_game *game, int x, int y);
 void			raycasting_horizontal_looking_up(t_game *game, t_ray *ray);
 void			raycasting_horizontal_looking_down(t_game *game, t_ray *ray);
@@ -137,25 +139,16 @@ double			assure_360_deg_angle(double a);
 void			draw_walls(t_game *game, t_raycast *raycast, t_ray *ray, int x);
 unsigned long	rgb_to_hexa(int color[3]);
 void			draw_floor_and_ceilling(t_game *game);
-t_texture_info	*textures_initializer(t_game *game);
-int				all_textures_loader(t_game	*game,
-					t_texture_info *all_textures);
-int				single_texture_loader(t_game *game, t_texture *texture,
+t_texture_info	*textures_initializer(void);
+int				all_textures_loader(t_texture_info *all_textures);
+int				single_texture_loader(t_texture *texture,
 					int texture_id);
 int				get_text_pixel(t_texture *texture, int x, int y);
 void			check_ray_collision(t_raycast *raycast, t_ray *ray,
 					t_game *game, int vertical);
-void			set_texture_x_coordonates(t_game *game, t_ray *ray);
+void			set_texture_x_coordonates(t_ray *ray);
 int				is_in_window_limits(t_game *game, float x, float y);
 void			print_player_position(t_game *game);
 int				is_wall_coliding(t_game *game, float x, float y);
-
-// debug
-
-void		ft_print_five(char selectid, int increment, t_game *game);
-void		debug_print_cubname(t_game *game);
-int			**tmp_game_tab_feeder(char *map, t_game *game);
-void		set_mlx_background(t_game *game);
-void		debug_draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 
 #endif

@@ -3,18 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vducoulo <vducoulo@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/11/17 22:35:26 by vducoulo         ###   ########.fr        #
+#    Updated: 2022/11/20 00:57:25 by abucia           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
+BONUS = 0
+C_BONUS = -D BONUS=${BONUS}
 NAME_BONUS = cub3D_bonus
-
-SRCS_GLOBAL = 	src/main.c \
+SRCS_GLOBAL =	src/main.c \
 				src/execution/execution_main.c \
 				src/execution/game_quitters.c \
 				src/execution/mlx_utils.c \
@@ -30,7 +31,6 @@ SRCS_GLOBAL = 	src/main.c \
 				src/execution/raycasting_player_angle_adapters.c \
 				src/execution/raycasting_collisions_checker.c  \
 				src/execution/wall_drawers.c \
-				src/execution/player_movements_utils.c \
 				src/execution/textures.c \
 				src/parsing/start_parse.c \
 				src/parsing/checker.c \
@@ -39,48 +39,62 @@ SRCS_GLOBAL = 	src/main.c \
 				src/utils/parsing_utils.c \
 				src/utils/common_utils.c \
 				src/utils/ft_parse_error.c \
-
-SRCS_MANDATORY = 
-
-SRCS_BONUS = 
+				src/execution/player_movements_utils.c
 
 OBJS_GLOBAL = ${SRCS_GLOBAL:.c=.o}
-OBJS_MANDATORY = ${SRCS_MANDATORY:.c=.o}
-OBJS_BONUS = ${SRCS_BONUS:.c=.o}
+OBJS_BONUS = ${SRCS_GLOBAL:.c=_bonus.o}
 
-INCLUDES = includes/header.h
-
-CC = gcc
+INCLUDES = includes/header.h libft/libft.h includes/execution.h includes/parsing.h
+CC = gcc #-g3 #-fsanitize=address
 RM = rm -f
 
-FLAGS = -O3
+FLAGS = -Wall -Wextra -Werror -O3
+
+MLX_FLAG = -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
+MLX = mlx/mlx_mac
 
 all: lib ${NAME}
+UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        MLX_FLAG = -Llibft -lft -Lmlx -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+		MLX = mlx/mlx_linux
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        MLX_FLAG = -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
+		MLX = mlx/mlx_mac
+    endif
 
-bonus: lib ${NAME_BONUS}
+bonus:
+	make -C ./ bb BONUS=1
 
-$(NAME): ${OBJS_GLOBAL} ${OBJS_MANDATORY}
-	${CC} ${OBJS_GLOBAL} ${OBJS_MANDATORY} -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit -o $(NAME)
+bb: lib ${NAME_BONUS}
 
-${NAME_BONUS}: ${OBJS_GLOBAL} ${OBJS_BONUS}
-	${CC} ${OBJS_GLOBAL} ${OBJS_BONUS} -Llibft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit -o $(NAME_BONUS)
-	
+$(NAME): ${OBJS_GLOBAL}
+	${CC} ${OBJS_GLOBAL} ${MLX_FLAG} -o $(NAME)
+
+${NAME_BONUS}: ${OBJS_BONUS}
+	${CC} ${OBJS_BONUS} ${MLX_FLAG} -o $(NAME_BONUS)
+
+
 %.o: %.c ${INCLUDES} Makefile
-	${CC} ${FLAGS} -Imlx -Ift -c $< -o $@
+	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@;
+
+%_bonus.o: %.c ${INCLUDES} Makefile
+	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@;
 
 clean:
-	${RM} ${OBJS_GLOBAL} ${OBJS_MANDATORY} ${OBJS_BONUS}
-	make clean -C mlx/mlx_mac
+	${RM} ${OBJS_GLOBAL} ${OBJS_BONUS}
+	make clean -C ${MLX}
 	make clean -C libft
 
-fclean:	clean
+fclean: clean
 	${RM} ${NAME} ${NAME_BONUS}
 	make fclean -C libft
 
 lib:
-	make -C mlx/mlx_mac
+	make -C ${MLX}
 	make -C libft
 
-re:	fclean all
-         
-.PHONY: all clean fclean re % 
+re:    fclean all
+
+.PHONY: all clean fclean re NAME bonus

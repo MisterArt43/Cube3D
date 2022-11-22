@@ -6,7 +6,7 @@
 /*   By: vducoulo <vducoulo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:01:10 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/16 15:20:46 by vducoulo         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:23:11 by vducoulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	sort_parse(t_game *game, int type, int i)
 			load_color(game, &game->ceilling_color, &i, 0);
 		else if (type == 7)
 			return (gen_tab(game, (game->fd_str + i)));
-		else if (type == 0)
-			break ;
+		else if (type == 0 && txt_stop_all(game))
+			ft_ermap("Invalid parameter in the file\n", game->fd_str, game);
 		i++;
 	}
 }
@@ -85,18 +85,17 @@ void	null_texture(t_game *game)
 
 void	start_parse(char *map_file, t_game *game)
 {
-	if (ft_strlen(map_file) < 4 || ft_strncmp(map_file + \
-	(ft_strlen(map_file) - 4), ".cub", 4) != 0)
-		ft_ermap("Invalid map format\n", NULL, game);
-	game->fd = open(map_file, O_RDONLY);
-	if (game->fd == -1)
-		ft_ermap("can't open the map\n", NULL, game);
-	game->fd_str = ft_readall(game->fd, game);
-	close(game->fd);
-	if (!game->fd_str)
-		ft_ermap("an error occur while allocate memory to the read buffer\n", \
-		NULL, game);
 	null_texture(game);
+	if ((ft_strlen(map_file) < 4 || ft_strncmp(map_file + \
+	(ft_strlen(map_file) - 4), ".cub", 4) != 0) && txt_stop_all(game))
+		ft_ermap("Invalid map format\n", game->fd_str, game);
+	game->fd = open(map_file, O_RDWR);
+	if (game->fd == -1 && txt_stop_all(game))
+		ft_ermap("can't open the map\n", game->fd_str, game);
+	game->fd_str = ft_readall(game->fd, game, 1);
+	if ((close(game->fd) == -1 || !game->fd_str) && txt_stop_all(game))
+		ft_ermap("an error occur while allocate memory to the read buffer\n", \
+		game->fd_str, game);
 	sort_parse(game, 0, 0);
 	free(game->fd_str);
 }

@@ -47,10 +47,10 @@ void	readall(int fd, char **hay)
 
 char	*get_next_line(int fd)
 {
-	static char	*hay[OPEN_MAX + 1];
+	static char	*hay[1024 + 1];
 	char		*tosend;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
 	readall(fd, &*hay);
 	if (!hay[fd])
